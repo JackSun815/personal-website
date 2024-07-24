@@ -9,12 +9,31 @@ video {
   .hero-container {
     background: linear-gradient(70deg, #00467F,#A5CC82);
     color:white;
-    height: 100vh;
+    height: 100vh; 
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
   }
+
+  #large-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+  }
+
+  .hero-left, .hero-right {
+    position: relative;
+    z-index: 2;
+  }
+
 
   .hero-container h1{
     transition: opacity 0.5s ease; 
@@ -33,6 +52,25 @@ video {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    padding-left: 50px;
+  }
+
+  .hero-left h2{
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-left h4{
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    font-style: italic;
+  }
+
+  .hero-left p{
+    padding-left: 65px;
+    padding-right: 15px;
   }
   
   .hero-right {
@@ -44,22 +82,14 @@ video {
   }
   
   .hero-right img {
-    max-width: 70%; /* Adjust image width if necessary */
+    max-width: 60%; /* Adjust image width if necessary */
     height: auto;
     border-radius: 15px;
   }
   
-  
-  .hero-container > h1 {
-    color: #fff;
-    font-size: 100px;
-    margin-top: -100px;
-  }
-  
-  .hero-container > p {
+  .hero-container p {
     margin-top: 8px;
     color: #fff;
-    font-size: 32px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
       'Lucida Sans', Arial, sans-serif;
   }
@@ -84,14 +114,53 @@ video {
   .fa-play-circle {
     margin-left: 4px;
   }
+
+  .hello-english { color:#A5CC82;}
+  .hello-french { color: #f17ab3; }
+  .hello-chinese { color: #eccc68; }
+  .hello-german { color: #35e2e5; }
+  .hello-japanese { color: #7e56e3; }
+  
+  .current-greeting {
+    transition: color 0.5s ease; /* Adjust the duration and easing if needed */
+  }
+
+
+
   @media screen and (max-width: 960px) {
     .hero-container {
       flex-direction: column; /* Stack elements when screen width is less than 960px */
+      height: 1200px;
+    }
+
+    .hero-container  h1 {
+      font-size: 30px;
+      margin-top: 0;
+    }
+
+    .hero-left {
+      padding: 20px;
+    }
+  
+  
+  
+    .hero-left p{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .hero-container h2{
+      font-size: 25px;
+    }
+    .hero-container h4{
+      font-size: 15px;
     }
   
     .hero-right img {
       max-width: 60%; /* Make image take full width on smaller screens */
-      margin-right: 0; /* Remove right margin on smaller screens */
+      margin-right: 0;
+      margin-top: -50px;
+      margin-bottom: 50px;
     }
   }
   @media screen and (max-width: 768px) {
@@ -113,3 +182,5 @@ video {
       width: 100%;
     }
 }
+
+
