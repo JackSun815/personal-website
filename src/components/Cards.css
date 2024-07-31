@@ -1,12 +1,13 @@
 .cards {
   padding: 4rem;
-  background: #E7E4D6;
+  background: linear-gradient(90deg, #16222A,#3A6073);
 }
 
 h1 {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 500;
+  color: white;
 }
 
 .cards__container {

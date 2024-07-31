@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import './Navbar.css';
 import { Button } from './Button';
-import logoImage from '../images/logo.png';
-
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -34,7 +32,7 @@ function Navbar() {
         <>
             <nav className="navbar">
                 <div className='navbar-container'>
-                    <RouterLink to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                    <RouterLink to='/' className='navbar-logo' onClick={() => { closeMobileMenu(); scroll.scrollToTop(); }}>
                         Jack Sun <i className="far fa-sun"></i>
                     </RouterLink>
                     <div className='menu-icon' onClick={handleClick}>
@@ -63,15 +61,26 @@ function Navbar() {
                         </li>
                         <li className='nav-item'>
                             <RouterLink 
-                                to='/contact' 
-                                className='nav-links-mobile' 
+                                to='/arts' 
+                                className='nav-links' 
                                 onClick={closeMobileMenu}
                             >
-                                Contact
+                                Arts
                             </RouterLink>
                         </li>
+
                     </ul>
-                    {button && <Button buttonStyle='btn--outline' button>Contact</Button>}
+                    {button && (
+                        <ScrollLink 
+                            to='footer' 
+                            className='btn-link' 
+                            smooth={true} 
+                            duration={500} 
+                            onClick={closeMobileMenu}
+                        >
+                            <Button buttonStyle='btn--outline'>Contact</Button>
+                        </ScrollLink>
+                    )}
                 </div>
             </nav>
         </>

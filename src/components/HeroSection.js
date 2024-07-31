@@ -35,19 +35,25 @@ function HeroSection() {
       <ParticleAnimation />
 
       <div className='hero-left' style={{ backgroundColor: greetings[currentGreetingIndex].color }}>
-        <h1 className={`current-greeting hello-${greetings[currentGreetingIndex].lang}`} style={{ color: greetings[currentGreetingIndex].fontColor }}>
+        <h1 
+          className={`current-greeting hello-${greetings[currentGreetingIndex].lang}`} 
+          style={{ color: greetings[currentGreetingIndex].fontColor }} 
+          
+        >
           {greetings[currentGreetingIndex].text}
         </h1>
-        <h2>I'm Jack Sun:</h2>
-        <h4>
+        <h2 data-aos='fade-up' data-aos-delay="100">I'm Jack Sun:</h2>
+        <h4 data-aos='fade-up' data-aos-delay="200">
           A Linguist, Developer and Student
           <br />
           @<span style={{ color: '#FF0000' }}>Carnegie Mellon University</span>
         </h4>
         <br /><br /><br />
-        <p>I'm passionate about the practical application of technology for social good. My love for languages and my hope to preserve endangered languages led me to explore various fields in information systems. As a full-stack developer with extensive experience in Python, SQL, Ruby, and C, I am dedicated to using technology to make a meaningful impact. </p>
+        <p data-aos='fade-up' data-aos-delay="300">
+          I'm passionate about the practical application of technology for social good. My love for languages and my hope to preserve endangered languages led me to explore various fields in information systems. As a full-stack developer with extensive experience in Python, SQL, Ruby, and C, I am dedicated to using technology to make a meaningful impact. 
+        </p>
         <br />
-        <div className='hero-btns' data-aos='fade-up'>
+        <div className='hero-btns' data-aos='fade-up' data-aos-delay="400">
           <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large' href="https://www.linkedin.com/in/jack-sun-5826a1279/">
             Linkedin <i className='fab fa-staylinked icon'></i>
           </Button>
