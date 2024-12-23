@@ -6,7 +6,6 @@ import './Cards.css';
 import chalfant from '../images/project-chalfant.png';
 import threeKingdoms from '../images/project-threekingdom.png';
 import gcpd from '../images/gcpd.png';
-import inprogress from '../images/in-progress.png';
 import tutorial from '../images/project-tutorial.png';
 import wals from '../images/project-visualization.png';
 import news from '../images/news.png';   
@@ -25,6 +24,17 @@ function Cards() {
       <h1>Projects</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
+          <ul className='cards__items'>
+          <CardItem
+                id="ribbit"
+                data-aos='fade-left'
+                src={`${process.env.PUBLIC_URL}/images/ribbit-logo.png`}
+                heading='Ribbit: A Language Visualization App'
+                text='A language learning application that uses real-time visualization and automatic feedback to help users improve their pronunciation.'
+                label='Swift, Python'
+                path='/sign-up'
+              />
+              </ul>
           <ul className='cards__items'>
             <CardItem
               id="chalfant"
@@ -56,17 +66,6 @@ function Cards() {
               path='/products'
             />
             <CardItem
-              id="inprogress"
-              data-aos='fade-left'
-              src={inprogress}
-              heading='Language Visualization App'
-              text='Investigating the effectiveness of pronunciation visualization in second language acquisition.'
-              label='C++'
-              path='/sign-up'
-            />
-          </ul>
-          <ul className='cards__items'>
-            <CardItem
               id="tutorial"
               data-aos='fade-right'
               src={tutorial}
@@ -75,6 +74,10 @@ function Cards() {
               label='Ruby on Rails'
               path='/services'
             />
+            
+          </ul>
+        
+          <ul className='cards__items'>
             <CardItem
               id="wals"
               data-aos='fade-left'
@@ -84,8 +87,6 @@ function Cards() {
               label='Python, Pandas, Matplotlib'
               path='/services'
             />
-          </ul>
-          <ul className='cards__items'>
             <CardItem
               id="news"
               data-aos='fade-right'
