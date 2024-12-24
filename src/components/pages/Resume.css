@@ -1,0 +1,25 @@
+.resume-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background: linear-gradient(90deg, #16222A,#3A6073);
+    padding-top: 20px; /* Space for the buttons */
+    padding-bottom: 100px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between; /* Distribute buttons evenly */
+    width: 70%; /* Make the button group the same width as the PDF container */
+    margin-bottom: 30px;
+    margin-top: 70px;
+  }
+  
+  .resume-pdf {
+    width: 70%;
+    height: 80vh; /* Adjust height as needed */
+    border: none;
+    overflow-y: scroll;
+  }
+  
