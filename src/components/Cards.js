@@ -101,7 +101,7 @@ function Cards() {
               data-aos='fade-left'
               src={beatbox}
               heading='Live from the Larynx'
-              text='A visualization of world languages, language families, and specific language features, including tone, gender, and word-order.'
+              text='An acoustics and phonetics analysis of beatboxing.'
               label='Acoustics Analysis, Linguistics, Matplotlib'
               path='/services'
             />

@@ -16,7 +16,6 @@ const Resume = () => {
       <iframe
         src={require('../../files/Jack-Sun-Resume.pdf')}
         className="resume-pdf"
-        frameBorder="0"
         title="Resume"
       ></iframe>
     </div>

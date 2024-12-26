@@ -12,7 +12,7 @@ import Sandpainting from './components/Sandpainting';
 
 function App() {
   const location = useLocation();
-
+  
   return (
     <>
       {location.pathname !== '/arts' && <Navbar />}

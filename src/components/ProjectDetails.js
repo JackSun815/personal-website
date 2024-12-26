@@ -11,8 +11,8 @@ const projectData = {
     label: 'IOS App',
     github: 'https://github.com/jessxec/Ribbit-443',
     demo: 'https://youtu.be/h1LJRxqDjfE',
-    text: 'Ribbit is an iOS app I developed as part of my senior thesis to help users learn Mandarin tones through interactive pitch visualization and gamified feedback. The app leverages Swift and integrates linguistic insights, such as formants and pitch contours, to offer users real-time feedback on their pronunciation.',
-    details: 'This project required extensive work in Swift, audio processing, and UI/UX design. I built a custom API that performs voice analysis, processing and returning pitch data. The app is  engaging and scalable as it includes themes, customizable sprites, and a reward system. It teaches Chinese from the basics, and lessons are cumulative. Currently, Ribbit features 5 modules, including Foundation Islands, Airport, Cafe, Beach, and Camping with each module offering unique vocabulary and practice scenarios.',
+    text: 'Ribbit is an iOS app I developed as a part of my senior thesis to help second language learners acquire Mandarin tones through interactive pitch visualization and gamified feedback. The app leverages Swift and integrates linguistic insights, such as formants and pitch contours, to offer users real-time feedback on their pronunciation.',
+    details: 'This project required extensive work in Swift, audio processing, and UI/UX design. I built a custom API that performs voice analysis, processing and returning pitch data. The app is engaging and scalable as it includes themes, customizable sprites, and a reward system. It teaches Chinese from the basics, and each lesson is cumulative. Currently, Ribbit features 5 modules, including Foundation Islands, Airport, Cafe, Beach, and Camping with each module offering unique vocabulary and practice scenarios.',
     screenshots: [
       `${process.env.PUBLIC_URL}/images/ribbit-1.png`,
       `${process.env.PUBLIC_URL}/images/ribbit-2.png`,
