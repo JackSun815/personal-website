@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "./static/css/main.470bab49.chunk.css",
-    "main.js": "./static/js/main.221be759.chunk.js",
-    "main.js.map": "./static/js/main.221be759.chunk.js.map",
+    "main.js": "./static/js/main.c5fdfa7a.chunk.js",
+    "main.js.map": "./static/js/main.c5fdfa7a.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.a3cf44a0.js",
     "runtime-main.js.map": "./static/js/runtime-main.a3cf44a0.js.map",
     "static/css/2.a98e61a7.chunk.css": "./static/css/2.a98e61a7.chunk.css",
-    "static/js/2.5de8ec47.chunk.js": "./static/js/2.5de8ec47.chunk.js",
-    "static/js/2.5de8ec47.chunk.js.map": "./static/js/2.5de8ec47.chunk.js.map",
+    "static/js/2.6dcaae4f.chunk.js": "./static/js/2.6dcaae4f.chunk.js",
+    "static/js/2.6dcaae4f.chunk.js.map": "./static/js/2.6dcaae4f.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.a98e61a7.chunk.css.map": "./static/css/2.a98e61a7.chunk.css.map",
     "static/css/main.470bab49.chunk.css.map": "./static/css/main.470bab49.chunk.css.map",
-    "static/js/2.5de8ec47.chunk.js.LICENSE.txt": "./static/js/2.5de8ec47.chunk.js.LICENSE.txt",
+    "static/js/2.6dcaae4f.chunk.js.LICENSE.txt": "./static/js/2.6dcaae4f.chunk.js.LICENSE.txt",
     "static/media/Shadowed Valleys-10.f93986ce.jpg": "./static/media/Shadowed Valleys-10.f93986ce.jpg",
     "static/media/Shadowed Valleys-18.f00bff89.jpg": "./static/media/Shadowed Valleys-18.f00bff89.jpg",
     "static/media/Shadowed Valleys-19.6a25a580.jpg": "./static/media/Shadowed Valleys-19.6a25a580.jpg",
@@ -28,6 +28,8 @@
     "static/media/Steel City-5.92ea772a.jpg": "./static/media/Steel City-5.92ea772a.jpg",
     "static/media/Steel City-6.72a0a0e2.jpg": "./static/media/Steel City-6.72a0a0e2.jpg",
     "static/media/Steel City.4fc919e7.jpg": "./static/media/Steel City.4fc919e7.jpg",
+    "static/media/Typology1.a4210ab9.png": "./static/media/Typology1.a4210ab9.png",
+    "static/media/Typology2.4f63b2f4.png": "./static/media/Typology2.4f63b2f4.png",
     "static/media/about-photo.0586c38f.png": "./static/media/about-photo.0586c38f.png",
     "static/media/beatbox.a48c1724.jpg": "./static/media/beatbox.a48c1724.jpg",
     "static/media/gcpd.8381d3e4.png": "./static/media/gcpd.8381d3e4.png",
@@ -36,13 +38,28 @@
     "static/media/project-chalfant.6deba068.png": "./static/media/project-chalfant.6deba068.png",
     "static/media/project-threekingdom.65f12cb4.png": "./static/media/project-threekingdom.65f12cb4.png",
     "static/media/project-tutorial.467fd60d.png": "./static/media/project-tutorial.467fd60d.png",
-    "static/media/project-visualization.9225a70d.png": "./static/media/project-visualization.9225a70d.png"
+    "static/media/project-visualization.9225a70d.png": "./static/media/project-visualization.9225a70d.png",
+    "static/media/sunsculpted1.695a33b2.jpg": "./static/media/sunsculpted1.695a33b2.jpg",
+    "static/media/sunsculpted10.3b7d4e48.jpg": "./static/media/sunsculpted10.3b7d4e48.jpg",
+    "static/media/sunsculpted11.3838f058.jpg": "./static/media/sunsculpted11.3838f058.jpg",
+    "static/media/sunsculpted12.dcdce991.jpg": "./static/media/sunsculpted12.dcdce991.jpg",
+    "static/media/sunsculpted13.6c352e0e.jpg": "./static/media/sunsculpted13.6c352e0e.jpg",
+    "static/media/sunsculpted14.a54740e5.jpg": "./static/media/sunsculpted14.a54740e5.jpg",
+    "static/media/sunsculpted15.43dc83b3.jpg": "./static/media/sunsculpted15.43dc83b3.jpg",
+    "static/media/sunsculpted2.f67d060e.jpg": "./static/media/sunsculpted2.f67d060e.jpg",
+    "static/media/sunsculpted3.81fa0401.jpg": "./static/media/sunsculpted3.81fa0401.jpg",
+    "static/media/sunsculpted4.171e80c3.jpg": "./static/media/sunsculpted4.171e80c3.jpg",
+    "static/media/sunsculpted5.15f667c3.jpg": "./static/media/sunsculpted5.15f667c3.jpg",
+    "static/media/sunsculpted6.caef3ebe.jpg": "./static/media/sunsculpted6.caef3ebe.jpg",
+    "static/media/sunsculpted7.f874d959.jpg": "./static/media/sunsculpted7.f874d959.jpg",
+    "static/media/sunsculpted8.0077889e.jpg": "./static/media/sunsculpted8.0077889e.jpg",
+    "static/media/sunsculpted9.f0dba984.jpg": "./static/media/sunsculpted9.f0dba984.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.a3cf44a0.js",
     "static/css/2.a98e61a7.chunk.css",
-    "static/js/2.5de8ec47.chunk.js",
+    "static/js/2.6dcaae4f.chunk.js",
     "static/css/main.470bab49.chunk.css",
-    "static/js/main.221be759.chunk.js"
+    "static/js/main.c5fdfa7a.chunk.js"
   ]
 }
