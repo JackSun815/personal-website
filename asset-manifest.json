@@ -1,18 +1,17 @@
 {
   "files": {
     "main.css": "./static/css/main.470bab49.chunk.css",
-    "main.js": "./static/js/main.41c00cab.chunk.js",
-    "main.js.map": "./static/js/main.41c00cab.chunk.js.map",
+    "main.js": "./static/js/main.221be759.chunk.js",
+    "main.js.map": "./static/js/main.221be759.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.a3cf44a0.js",
     "runtime-main.js.map": "./static/js/runtime-main.a3cf44a0.js.map",
     "static/css/2.a98e61a7.chunk.css": "./static/css/2.a98e61a7.chunk.css",
-    "static/js/2.436a14e5.chunk.js": "./static/js/2.436a14e5.chunk.js",
-    "static/js/2.436a14e5.chunk.js.map": "./static/js/2.436a14e5.chunk.js.map",
+    "static/js/2.5de8ec47.chunk.js": "./static/js/2.5de8ec47.chunk.js",
+    "static/js/2.5de8ec47.chunk.js.map": "./static/js/2.5de8ec47.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.a98e61a7.chunk.css.map": "./static/css/2.a98e61a7.chunk.css.map",
     "static/css/main.470bab49.chunk.css.map": "./static/css/main.470bab49.chunk.css.map",
-    "static/js/2.436a14e5.chunk.js.LICENSE.txt": "./static/js/2.436a14e5.chunk.js.LICENSE.txt",
-    "static/media/Jack-Sun-Resume.pdf": "./static/media/Jack-Sun-Resume.f14c4cdb.pdf",
+    "static/js/2.5de8ec47.chunk.js.LICENSE.txt": "./static/js/2.5de8ec47.chunk.js.LICENSE.txt",
     "static/media/Shadowed Valleys-10.f93986ce.jpg": "./static/media/Shadowed Valleys-10.f93986ce.jpg",
     "static/media/Shadowed Valleys-18.f00bff89.jpg": "./static/media/Shadowed Valleys-18.f00bff89.jpg",
     "static/media/Shadowed Valleys-19.6a25a580.jpg": "./static/media/Shadowed Valleys-19.6a25a580.jpg",
@@ -42,8 +41,8 @@
   "entrypoints": [
     "static/js/runtime-main.a3cf44a0.js",
     "static/css/2.a98e61a7.chunk.css",
-    "static/js/2.436a14e5.chunk.js",
+    "static/js/2.5de8ec47.chunk.js",
     "static/css/main.470bab49.chunk.css",
-    "static/js/main.41c00cab.chunk.js"
+    "static/js/main.221be759.chunk.js"
   ]
 }
