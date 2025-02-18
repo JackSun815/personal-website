@@ -11,8 +11,31 @@ const projectData = {
     label: 'IOS App',
     github: 'https://github.com/jessxec/Ribbit-443',
     demo: 'https://youtu.be/h1LJRxqDjfE',
-    text: 'Ribbit is an iOS app I developed as part of my senior thesis to help users learn Mandarin tones through interactive pitch visualization and gamified feedback. The app leverages Swift and integrates linguistic insights, such as formants and pitch contours, to offer users real-time feedback on their pronunciation.',
-    details: 'This project required extensive work in Swift, audio processing, and UI/UX design. I built a custom API that performs voice analysis, processing and returning pitch data. The app is  engaging and scalable as it includes themes, customizable sprites, and a reward system. It teaches Chinese from the basics, and lessons are cumulative. Currently, Ribbit features 5 modules, including Foundation Islands, Airport, Cafe, Beach, and Camping with each module offering unique vocabulary and practice scenarios.',
+    text: `<b>Ribbit</b> is an iOS app I developed as part of my senior thesis to help second-language learners acquire Mandarin tones through interactive pitch visualization and gamified feedback. The app is built in Swift and integrates advanced audio processing techniques, leveraging pitch contours and formant analysis to provide real-time pronunciation feedback. Users can see a visual representation of their pitch alongside an idealized native speaker model, allowing them to adjust and refine their pronunciation dynamically.`,
+
+    details: `<b>Technical Highlights:</b><br />
+    <b>1. Custom Voice Analysis API:</b> Developed a cloud-based API that processes and returns pitch data, analyzing users' speech in real-time.<br />
+    <b>2. Adaptive Pitch Calibration:</b> Detects and calibrates each user’s vocal range, dynamically adjusting the app’s scoring algorithm to enhance accuracy. This personalized adjustment allows the app to provide more reliable tone recognition, automatically scoring and delivering real-time feedback based on the user’s unique pitch profile.<br />
+    <b>3. Gamified Learning:</b> Integrated themes, customizable sprites, and a dynamic reward system to enhance engagement and retention.<br />
+    <b>4. Scalable Modular Design:</b> Ribbit teaches Chinese progressively, starting from fundamental phonetics and advancing through vocabulary-rich modules that are useful in real life scenarios. <br /><br />
+    
+    <b>Current Features & Learning Modules:</b><br />
+    At this stage, Ribbit includes 5 interactive modules, each set in a unique environment:<br />
+    1. 🌱 <b>Foundation Islands:</b> Master the basics of Pinyin and Mandarin tones.<br />
+    2. ✈️ <b>Airport:</b> Learn travel-related phrases and tone combinations.<br />
+    3. ☕ <b>Café:</b> Practice ordering food.<br />
+    4. 🏖️ <b>Beach:</b> Reinforce pronunciation with conversational scenarios.<br />
+    5. ⛺ <b>Camping:</b> Introduction to advanced tone concepts.<br /><br />
+    
+    <b>Research & Linguistic Study:</b><br />
+    Beyond its technical implementation, Ribbit was also the subject of a linguistic study examining the effectiveness of visual feedback in Mandarin tone acquisition. I conducted an experiment with three groups:<br />
+    1️. A control group with no visual feedback, only schematics are provided.<br />
+    2️. A group with static visual feedback.<br />
+    3️. A group using Ribbit’s interactive pitch visualization, with animated feedback.<br /><br />
+    
+    Findings from the study will be presented at <b>Carnegie Mellon's Meeting of the Minds</b> and at the <b>National Conference on Undergraduate Research</b>, which will be held in April, 2025. <br /><br />
+    
+    <b>Future Plans:</b> Ribbit is designed to be scalable, with potential expansions including more themes, additional tone challenges, celebrity audio and AI-driven feedback for even greater accuracy.`,    
     screenshots: [
       `${process.env.PUBLIC_URL}/images/ribbit-1.png`,
       `${process.env.PUBLIC_URL}/images/ribbit-2.png`,
@@ -54,8 +77,18 @@ const projectData = {
     heading: "Romance of the Three Kingdoms",
     label: 'Python Game',
     demo: 'https://youtu.be/mujMOqb_aog?si=Ajk9KglBb4jA0Ulz', 
-    text: 'This project is a 2D open world game developed in Python using object-oriented programming. If you would like to view the code, please contact me for repository access.',
-    details: 'In this game, the player can travel along a path and interact with various characters and items. The game features a simple inventory system that includes a sword, bow, and AK-47 for attacking, as well as fish for hunger and rice wine for health. The enemy uses a backtracking algorithm to find and attack the player.',
+    text: `<b>Romance of the Three Kingdoms</b> is a 2D open-world game I developed in Python, utilizing object-oriented programming (OOP) to create an interactive experience set in the Three Kingdoms period of ancient China. The game allows players to explore a vast environment, interact with NPCs, collect items, and engage in combat using strategic gameplay mechanics.<br /><br />
+
+    The game features an adaptive enemy AI system that leverages a <b>backtracking algorithm</b> to intelligently navigate the world and pursue the player. Additionally, players must manage a dynamic inventory that includes both weapons and consumables to survive and progress in the game.<br /><br />`,     
+    details: `<b>Technical Highlights:</b><br />
+    <b>1. Object-Oriented Design:</b> Built using OOP principles, with modular classes for players, NPCs, enemies, and items, allowing scalable development.<br />
+    <b>2. Intelligent Enemy AI:</b> Implemented a <b>backtracking algorithm</b> for enemy movement and attack strategies, creating a more engaging combat system.<br />
+    <b>3. Dynamic Inventory System:</b> Players can collect and utilize:<br />
+      - ⚔️ <b>Weapons:</b> Sword, bow, and AK-47, each with unique attack mechanics.<br />
+      - 🐟 <b>Consumables:</b> Fish (hunger management) and rice wine (health restoration).<br />
+    <b>4. Interactive World Exploration:</b> Players can travel across a mapped-out world, encountering different characters, obstacles, and quests.<br /><br />
+
+    If you're interested in viewing the source code or contributing, please contact me for repository access.`,
     screenshots: [
       `${process.env.PUBLIC_URL}/images/threekingdom-screenshot1.png`,
       `${process.env.PUBLIC_URL}/images/threekingdom-screenshot2.png`,
@@ -132,8 +165,8 @@ function ProjectDetails() {
         <a href={project.demo} className='btn' target='_blank' rel='noopener noreferrer'>Live Demo</a>
       </div>
       <br />
-      <p>{project.text}</p>
-      <p>{project.details}</p>
+      <div dangerouslySetInnerHTML={{ __html: project.text }} />
+      <div dangerouslySetInnerHTML={{ __html: project.details }} />
       <div className={`screenshots ${id === 'ribbit' ? 'ribbit-images' : ''}`}>
           {project.screenshots.map((src, index) => (
             <img

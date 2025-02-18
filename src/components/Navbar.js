@@ -70,17 +70,7 @@ function Navbar() {
                         </li>
 
                     </ul>
-                    {button && (
-                        <ScrollLink 
-                            to='footer' 
-                            className='btn-link' 
-                            smooth={true} 
-                            duration={500} 
-                            onClick={closeMobileMenu}
-                        >
-                            <Button buttonStyle='btn--outline'>Contact</Button>
-                        </ScrollLink>
-                    )}
+                    
                 </div>
             </nav>
         </>
