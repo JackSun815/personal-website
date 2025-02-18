@@ -1,7 +1,7 @@
 {
   "name": "jacksun-website",
   "version": "0.1.0",
-  "homepage": "https://jacksunn.com",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@formspree/react": "^2.5.1",
