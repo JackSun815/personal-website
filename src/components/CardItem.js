@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function CardItem(props) {
+  const [isStarred, setIsStarred] = useState(props.starred || false);
+
+  const handleStarClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsStarred(!isStarred);
+  };
+
   return (
     <>
       <li className={`cards__item ${props.className}`} data-aos={props['data-aos']}>
+        <div className='cards__item__star' onClick={handleStarClick}>
+          <span className={`star ${isStarred ? 'star--filled' : 'star--empty'}`}>
+            ★
+          </span>
+        </div>
         <Link className='cards__item__link' to={`/project/${props.id}`}>
           <figure className='cards__item__pic-wrap' data-category={props.label}>
             <img

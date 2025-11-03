@@ -8,15 +8,13 @@ video {
 
   .hero-container {
     background: linear-gradient(70deg, #00467F,#A5CC82);
-    color:white;
+    color: white;
     height: 100vh; 
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     position: relative;
-    width: 100%;
-    height: 100vh; 
     overflow: hidden;
   }
 
@@ -52,7 +50,7 @@ video {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    padding-left: 50px;
+    padding-left: 30px;
   }
 
   .hero-left h2{
@@ -69,7 +67,7 @@ video {
   }
 
   .hero-left p{
-    padding-left: 65px;
+    padding-left: 40px;
     padding-right: 15px;
   }
   
@@ -82,10 +80,17 @@ video {
   }
   
   .hero-right img {
-    max-width: 60%; /* Adjust image width if necessary */
+    max-width: 36%; /* slightly larger on laptop/desktop */
     height: auto;
-    border-radius: 15px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: transform 200ms ease, box-shadow 200ms ease;
   }
+
+.hero-right img:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.32);
+}
   
   .hero-container p {
     margin-top: 8px;
@@ -133,7 +138,7 @@ video {
       height: 1200px;
     }
 
-    .hero-container  h1 {
+    .hero-container h1 {
       font-size: 30px;
       margin-top: 0;
     }
@@ -141,8 +146,6 @@ video {
     .hero-left {
       padding: 20px;
     }
-  
-  
   
     .hero-left p{
       padding-left: 20px;
@@ -157,10 +160,22 @@ video {
     }
   
     .hero-right img {
-      max-width: 60%; /* Make image take full width on smaller screens */
+      max-width: 40%; /* Make image take appropriate width on tablet */
       margin-right: 0;
       margin-top: -50px;
       margin-bottom: 50px;
+    }
+  }
+  /* Phone / small devices */
+  @media screen and (max-width: 480px) {
+    .hero-right img {
+      max-width: 34%; /* slightly smaller on phones so it doesn't dominate */
+      margin-top: -30px;
+      margin-bottom: 30px;
+    }
+    .hero-left p{
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
   @media screen and (max-width: 768px) {
