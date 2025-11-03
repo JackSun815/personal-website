@@ -24,88 +24,111 @@ function Cards() {
       <h1>Projects</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
-          <ul className='cards__items'>
-          <CardItem
+          {/* Featured Projects */}
+          <div className='cards__featured-section'>
+            <ul className='cards__items cards__featured'>
+              <CardItem
+                id="pypeflow"
+                data-aos='fade-up'
+                src={`${process.env.PUBLIC_URL}/images/pypeflow-placeholder.png`}
+                heading='PypeFlow'
+                text='An innovative workflow automation platform that streamlines data processing pipelines and enhances team collaboration.'
+                label='Python, Flask, React'
+                path='/sign-up'
+                starred={true}
+              />
+              <CardItem
                 id="ribbit"
-                data-aos='fade-left'
+                data-aos='fade-up'
                 src={`${process.env.PUBLIC_URL}/images/ribbit-logo.png`}
                 heading='Ribbit: A Language Visualization App'
                 text='A language learning application that uses real-time visualization and automatic feedback to help users improve their pronunciation.'
                 label='Swift, Python'
                 path='/sign-up'
+                starred={true}
               />
-              </ul>
-          <ul className='cards__items'>
-            <CardItem
-              id="chalfant"
-              data-aos='fade-right'
-              src={chalfant}
-              heading="Chalfant Run / Thompson Run Watershed Association"
-              text='Website deployed at chalfantrun.org'
-              label='Static Website'
-              path='/services'
-            />
-            <CardItem
-              id="gcpd"
-              data-aos='fade-left'
-              src={gcpd}
-              heading='Gotham City Police Department'
-              text='A web app built in multiple phases, starting with model creation, followed by testing, controller implementation, API development, and frontend construction.'
-              label='Ruby on Rails, React'
-              path='/services'
-            />
-          </ul>
-          <ul className='cards__items'>
-            <CardItem
-              id="threekingdom"
-              data-aos='fade-right'
-              src={threeKingdoms}
-              heading='Romance of the Three Kingdoms'
-              text='An old zelda-style game with fighting and drinking actions.'
-              label='Python, Object-Oriented Programming'
-              path='/products'
-            />
-            <CardItem
-              id="tutorial"
-              data-aos='fade-right'
-              src={tutorial}
-              heading="Ruby on Rails Tutorial"
-              text='A tutorial for students in Web Development class, covering topics like MVC architecture, CRUD operations, Ruby on Rails framework, Ruby Gems, database operations, and APIs.'
-              label='Ruby on Rails'
-              path='/services'
-            />
-            
-          </ul>
-        
-          <ul className='cards__items'>
-            <CardItem
-              id="wals"
-              data-aos='fade-left'
-              src={wals}
-              heading='World Atlas of Language Structures'
-              text='A visualization of world languages, language families, and specific language features, including tone, gender, and word-order.'
-              label='Python, Pandas, Matplotlib'
-              path='/services'
-            />
-            <CardItem
-              id="news"
-              data-aos='fade-right'
-              src={news}
-              heading="Fake News Classification"
-              text='A fake news classification project developed in Jupyter Notebook, featuring exploratory data analysis (EDA), data cleaning, and Naive Bayes model training.'
-              label='Python, NLP'
-              path='/services'
-            />
-            <CardItem
-              id="beatbox"
-              data-aos='fade-left'
-              src={beatbox}
-              heading='Live from the Larynx'
-              text='A visualization of world languages, language families, and specific language features, including tone, gender, and word-order.'
-              label='Acoustics Analysis, Linguistics, Matplotlib'
-              path='/services'
-            />
-          </ul>
+            </ul>
+          </div>
+
+          {/* Other Projects */}
+          <div className='cards__other-section'>
+            <ul className='cards__items'>
+              <CardItem
+                id="chalfant"
+                data-aos='fade-up'
+                src={chalfant}
+                heading="Chalfant Run / Thompson Run Watershed Association"
+                text='Website deployed at chalfantrun.org'
+                label='Static Website'
+                path='/services'
+                starred={false}
+              />
+              <CardItem
+                id="gcpd"
+                data-aos='fade-up'
+                src={gcpd}
+                heading='Gotham City Police Department'
+                text='A web app built in multiple phases, starting with model creation, followed by testing, controller implementation, API development, and frontend construction.'
+                label='Ruby on Rails, React'
+                path='/services'
+                starred={false}
+              />
+              <CardItem
+                id="threekingdom"
+                data-aos='fade-up'
+                src={threeKingdoms}
+                heading='Romance of the Three Kingdoms'
+                text='An old zelda-style game with fighting and drinking actions.'
+                label='Python, Object-Oriented Programming'
+                path='/products'
+                starred={false}
+              />
+            </ul>
+            <ul className='cards__items'>
+              <CardItem
+                id="tutorial"
+                data-aos='fade-up'
+                src={tutorial}
+                heading="Ruby on Rails Tutorial"
+                text='A tutorial for students in Web Development class, covering topics like MVC architecture, CRUD operations, Ruby on Rails framework, Ruby Gems, database operations, and APIs.'
+                label='Ruby on Rails'
+                path='/services'
+                starred={false}
+              />
+              <CardItem
+                id="wals"
+                data-aos='fade-up'
+                src={wals}
+                heading='World Atlas of Language Structures'
+                text='A visualization of world languages, language families, and specific language features, including tone, gender, and word-order.'
+                label='Python, Pandas, Matplotlib'
+                path='/services'
+                starred={false}
+              />
+              <CardItem
+                id="news"
+                data-aos='fade-up'
+                src={news}
+                heading="Fake News Classification"
+                text='A fake news classification project developed in Jupyter Notebook, featuring exploratory data analysis (EDA), data cleaning, and Naive Bayes model training.'
+                label='Python, NLP'
+                path='/services'
+                starred={false}
+              />
+            </ul>
+            <ul className='cards__items'>
+              <CardItem
+                id="beatbox"
+                data-aos='fade-up'
+                src={beatbox}
+                heading='Live from the Larynx'
+                text='A visualization of world languages, language families, and specific language features, including tone, gender, and word-order.'
+                label='Acoustics Analysis, Linguistics, Matplotlib'
+                path='/services'
+                starred={false}
+              />
+            </ul>
+          </div>
         </div>
       </div>
     </div>

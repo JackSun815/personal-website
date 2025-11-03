@@ -26,7 +26,32 @@ function Navbar() {
         showButton();
     }, []);
 
-    window.addEventListener('resize', showButton);
+    // Register resize listener once and clean up on unmount to avoid duplicate listeners
+    useEffect(() => {
+        window.addEventListener('resize', showButton);
+        return () => window.removeEventListener('resize', showButton);
+    }, []);
+
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (click) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [click]);
+
+    // Close menu when clicking outside (on the overlay)
+    const handleOverlayClick = (e) => {
+        if (e.target.classList.contains('nav-menu') && click) {
+            closeMobileMenu();
+        }
+    };
 
     return (
         <>
@@ -39,7 +64,7 @@ function Navbar() {
                         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
                     </div>
                         
-                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <ul className={click ? 'nav-menu active' : 'nav-menu'} onClick={handleOverlayClick}>
                         <li className='nav-item'>
                             <RouterLink to='/about' className='nav-links' onClick={closeMobileMenu}>
                                 About

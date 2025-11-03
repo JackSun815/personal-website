@@ -4,8 +4,9 @@ import 'aos/dist/aos.css';
 import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
-import heroImage from '../images/hero-right.png';
 import ParticleAnimation from './ParticleAnimation';
+// Use the profile image from the public/ folder. There's already a copy at public/images/profile.png.
+const profilePublicPath = process.env.PUBLIC_URL + '/images/profile.png';
 
 function HeroSection() {
   const greetings = [
@@ -63,7 +64,7 @@ function HeroSection() {
         </div>
       </div>
       <div className='hero-right' data-aos='fade-left'>
-        <img src={heroImage} alt='Hero' /> {/* Use the imported image variable */}
+        <img src={profilePublicPath} alt='Profile' /> {/* Use profile.png from public/images */}
       </div>
     </div>
   );
