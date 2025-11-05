@@ -20,13 +20,21 @@ body {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #0A66C2;
+    color: #05294a !important; /* stronger override for global h1 rules */
+    background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+    -webkit-text-fill-color: #05294a !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
   }
 
   .project-details h2 {
     font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 20px; 
+    color: #0b3b66 !important;
   }
   
   .button-section {

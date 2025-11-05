@@ -32,7 +32,7 @@ function Cards() {
                 data-aos='fade-up'
                 src={`${process.env.PUBLIC_URL}/images/pypeflow-placeholder.png`}
                 heading='PypeFlow'
-                text='An innovative workflow automation platform that streamlines data processing pipelines and enhances team collaboration.'
+                text='Production level three-in-one dashboard for Managers, SDRs, and clients'
                 label='Python, Flask, React'
                 path='/sign-up'
                 starred={true}
@@ -52,6 +52,7 @@ function Cards() {
 
           {/* Other Projects */}
           <div className='cards__other-section'>
+            {/* Render remaining projects in a single grid so items flow naturally without gaps */}
             <ul className='cards__items'>
               <CardItem
                 id="chalfant"
@@ -83,8 +84,6 @@ function Cards() {
                 path='/products'
                 starred={false}
               />
-            </ul>
-            <ul className='cards__items'>
               <CardItem
                 id="tutorial"
                 data-aos='fade-up'
@@ -115,8 +114,6 @@ function Cards() {
                 path='/services'
                 starred={false}
               />
-            </ul>
-            <ul className='cards__items'>
               <CardItem
                 id="beatbox"
                 data-aos='fade-up'

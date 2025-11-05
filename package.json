@@ -1,7 +1,7 @@
 {
   "name": "jacksun-website",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://jacksunn.com",
   "private": true,
   "dependencies": {
     "@formspree/react": "^2.5.1",
@@ -17,8 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-  "start": "cross-env CHOKIDAR_USEPOLLING=true HOST=localhost NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
-    "build": "react-scripts build",
+    "start": "cross-env CHOKIDAR_USEPOLLING=true HOST=localhost NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "gh-pages": "^6.1.1"
   }
 }

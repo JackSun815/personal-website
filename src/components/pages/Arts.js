@@ -148,7 +148,7 @@ const Arts = () => {
 
   return (
     <div className="container-fluid arts-container">
-    <div className="row flex-nowrap">
+    <div className="row">
       {/* Sidebar */}
       <div className={`sidebar-container ${isNavCollapsed ? 'collapsed' : 'expanded'} ${isMobile ? 'mobile' : ''}`}>
         <div className="hamburger-menu" onClick={toggleNav}>
@@ -327,6 +327,15 @@ const Arts = () => {
             </div>
           </div>
           
+          {/* Sandpainting section (Macbeth video) */}
+          <h3>Sandpainting</h3>
+          <div id="macbeth" className="row image-row sandpainting-row">
+            <div className="col-12 mb-4">
+              <div className="video-wrapper">
+                <iframe width="960" height="640" src="https://www.youtube.com/embed/yci6vpEMu1c?si=sWH-VmYQoy8awIFQ&amp;start=12" title="Sandpainting Macbeth" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
