@@ -8,7 +8,6 @@ import ProjectDetails from './components/ProjectDetails';
 import Resume from './components/pages/Resume';
 import Arts from './components/pages/Arts';
 import Footer from './components/Footer';
-import Sandpainting from './components/Sandpainting';
 import Analytics from './components/Analytics';
 
 function App() {
@@ -234,7 +233,7 @@ function App() {
         <Route path="/project/:id" element={<ProjectDetails />} />
         <Route path="/resume" element={<Resume />} />
         <Route path="/arts" element={<Arts />} />
-        <Route path="/sandpainting" element={<Sandpainting />} />
+  {/* Sandpainting moved into the Arts page as a section (anchor #macbeth) */}
         <Route path="/footer" element={<Footer />} />
         <Route path="/analytics" element={<Analytics />} />
       </Routes>

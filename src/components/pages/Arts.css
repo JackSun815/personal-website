@@ -14,10 +14,11 @@ body {
     background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%) !important;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.08);
     border-right: 1px solid rgba(36, 127, 141, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: auto;
     transition: all 0.3s ease;
     width: 280px;
     min-width: 280px;
@@ -183,7 +184,7 @@ body {
 }
 
 .nav-item {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .title:hover {
@@ -232,8 +233,10 @@ body {
     margin-bottom: 100px !important;
 }
 
-/* Photography container styles */
+/* Prevent main content from sliding under the sidebar on wide screens */
+/* Photography container always needs left margin for fixed sidebar */
 .photography-container { 
+    margin-left: 280px; /* Sidebar width */
     padding: 60px 50px;
     background: transparent;
     transition: margin-left 0.3s ease;
@@ -259,6 +262,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    clear: both; /* ensure headings clear any floats */
 }
 
 .photography-container h3:first-of-type {
@@ -594,5 +598,32 @@ html {
 .nav-link:focus {
     outline: 2px solid #247f8d;
     outline-offset: 2px;
+}
+
+/* Sandpainting (Macbeth) layout tweaks */
+.sandpainting-row {
+    clear: both;
+    margin-top: 4rem;
+    padding-top: 2rem;
+}
+
+.video-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 0;
+}
+
+@media (max-width: 992px) {
+    .sandpainting-row {
+        margin-top: 3rem;
+    }
 }
 

@@ -10,19 +10,24 @@ const profilePublicPath = process.env.PUBLIC_URL + '/images/profile.png';
 
 function HeroSection() {
   const greetings = [
-    { lang: 'English', text: '· Hello!', fontColor: '#1ee8b6' },
-    { lang: 'French', text: '· Bonjour!', fontColor: '#35e2e5' },
-    { lang: 'Chinese', text: '· 你好!', fontColor: '#eccc68' },
-    { lang: 'German', text: '· Guten Tag!', fontColor: '#b9eb0d' },
-    { lang: 'Japanese', text: '· こんにちは!', fontColor: '#feca57' }
+    { lang: 'English', text: '· Hello!', fontColor: '#b3b3d4' },
+    { lang: 'French', text: '· Bonjour!', fontColor: '#b3b3d4' },
+    { lang: 'Chinese', text: '· 你好!', fontColor: '#b3b3d4' },
+    { lang: 'German', text: '· Guten Tag!', fontColor: '#b3b3d4' },
+    { lang: 'Japanese', text: '· こんにちは!', fontColor: '#b3b3d4' }
   ];
 
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
-    }, 1500);
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
+        setIsAnimating(false);
+      }, 500); // Blur out duration
+    }, 3000); // How long text stays visible
 
     return () => clearInterval(interval);
   }, []);
@@ -37,7 +42,7 @@ function HeroSection() {
 
       <div className='hero-left' style={{ backgroundColor: greetings[currentGreetingIndex].color }}>
         <h1 
-          className={`current-greeting hello-${greetings[currentGreetingIndex].lang}`} 
+          className={`current-greeting ${isAnimating ? 'blur-out' : 'blur-in'} hello-${greetings[currentGreetingIndex].lang}`} 
           style={{ color: greetings[currentGreetingIndex].fontColor }} 
           
         >

@@ -56,7 +56,7 @@ function Footer() {
                     <div className='footer-links'>
                         <Link to="/project/pypeflow">PypeFlow ⭐</Link>
                         <Link to="/project/ribbit">Ribbit ⭐</Link>
-                        <Link to="/sandpainting">Sand Painting</Link>
+                        <Link to="/arts#macbeth">Sand Painting</Link>
                     </div>
                 </div>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProjectDetails.css';
 
@@ -149,6 +149,11 @@ const projectData = {
 function ProjectDetails() {
   const { id } = useParams();
   const project = projectData[id];
+
+  // Ensure we start at top of page when navigating to a project
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [id]);
 
   if (!project) {
     return <h2>In development...</h2>;
