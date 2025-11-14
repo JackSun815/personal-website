@@ -22,9 +22,15 @@ const HeyJack = () => {
   // Check for API key on mount
   useEffect(() => {
     const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-    if (!apiKey) {
-      setError('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file and restart the dev server.');
-    }
+      if (!apiKey) {
+        // In production (GitHub Pages), API key is not available for security reasons
+        // Show a user-friendly message instead of an error
+        if (process.env.NODE_ENV === 'production') {
+          setError('ChatGPT feature requires a backend proxy for security. This feature is available in development mode. For production, please set up a backend API to securely handle the OpenAI API key.');
+        } else {
+          setError('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file and restart the dev server.');
+        }
+      }
   }, []);
 
   // Web search function using DuckDuckGo Instant Answer API (free, no API key)
@@ -123,6 +129,9 @@ const HeyJack = () => {
       const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
       
       if (!apiKey) {
+        if (process.env.NODE_ENV === 'production') {
+          throw new Error('ChatGPT feature requires a backend proxy for security. This feature is available in development mode. For production deployment, set up a backend API to securely handle the OpenAI API key.');
+        }
         throw new Error('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file');
       }
 
