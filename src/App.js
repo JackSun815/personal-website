@@ -7,6 +7,7 @@ import About from './components/About';
 import ProjectDetails from './components/ProjectDetails';
 import Resume from './components/pages/Resume';
 import Arts from './components/pages/Arts';
+import HeyJack from './components/pages/HeyJack';
 import Footer from './components/Footer';
 import Analytics from './components/Analytics';
 
@@ -225,7 +226,7 @@ function App() {
 
   return (
     <>
-      {location.pathname !== '/arts' && location.pathname !== '/analytics' && <Navbar />}
+      {location.pathname !== '/arts' && location.pathname !== '/analytics' && location.pathname !== '/heyjack' && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -234,6 +235,7 @@ function App() {
         <Route path="/resume" element={<Resume />} />
         <Route path="/arts" element={<Arts />} />
   {/* Sandpainting moved into the Arts page as a section (anchor #macbeth) */}
+        <Route path="/heyjack" element={<HeyJack />} />
         <Route path="/footer" element={<Footer />} />
         <Route path="/analytics" element={<Analytics />} />
       </Routes>

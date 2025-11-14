@@ -89,12 +89,14 @@ video {
     height: auto;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    filter: brightness(1.18) contrast(1.04) saturate(1.08) sepia(0.08) hue-rotate(-4deg);
+    transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
   }
 
 .hero-right img:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 12px 36px rgba(0,0,0,0.32);
+  filter: brightness(1.24) contrast(1.05) saturate(1.12) sepia(0.08) hue-rotate(-4deg);
 }
   
   .hero-container p {
