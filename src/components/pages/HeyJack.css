@@ -44,6 +44,91 @@
   opacity: 0.8;
 }
 
+/* Password form styling */
+.heyjack-password-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 40px 20px;
+}
+
+.heyjack-password-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.heyjack-password-box h2 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.heyjack-password-box p {
+  color: #666;
+  margin: 0 0 30px 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.heyjack-password-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.heyjack-password-input {
+  padding: 14px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.heyjack-password-input:focus {
+  border-color: #667eea;
+}
+
+.heyjack-password-button {
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.heyjack-password-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.heyjack-password-button:active {
+  transform: translateY(0);
+}
+
+.heyjack-password-error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: -10px;
+  padding: 8px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
 .heyjack-chat {
   display: flex;
   flex-direction: column;

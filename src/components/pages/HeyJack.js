@@ -8,8 +8,12 @@ const HeyJack = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const passwordInputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -19,19 +23,51 @@ const HeyJack = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Check for API key on mount
+  // Check for authentication on mount
   useEffect(() => {
-    const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-      if (!apiKey) {
-        // In production (GitHub Pages), API key is not available for security reasons
-        // Show a user-friendly message instead of an error
-        if (process.env.NODE_ENV === 'production') {
-          setError('ChatGPT feature requires a backend proxy for security. This feature is available in development mode. For production, please set up a backend API to securely handle the OpenAI API key.');
-        } else {
-          setError('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file and restart the dev server.');
-        }
-      }
+    const storedAuth = localStorage.getItem('heyjack_authenticated');
+    if (storedAuth === 'true') {
+      setIsAuthenticated(true);
+    } else {
+      // Focus password input when component mounts
+      setTimeout(() => passwordInputRef.current?.focus(), 100);
+    }
   }, []);
+
+  // Check for API key on mount (only if authenticated)
+  useEffect(() => {
+    if (isAuthenticated) {
+      const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+      if (!apiKey) {
+        setError('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file and restart the dev server.');
+      }
+    }
+  }, [isAuthenticated]);
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    const correctPassword = process.env.REACT_APP_HEYJACK_PASSWORD || 'jack';
+    
+    if (passwordInput === correctPassword) {
+      setIsAuthenticated(true);
+      setPasswordError('');
+      localStorage.setItem('heyjack_authenticated', 'true');
+      inputRef.current?.focus();
+    } else {
+      setPasswordError('Incorrect password. Please try again.');
+      setPasswordInput('');
+      passwordInputRef.current?.focus();
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setMessages([]);
+    setError(null);
+    setPasswordInput('');
+    localStorage.removeItem('heyjack_authenticated');
+    setTimeout(() => passwordInputRef.current?.focus(), 100);
+  };
 
   // Web search function using DuckDuckGo Instant Answer API (free, no API key)
   // For production, consider using SerpAPI, Google Custom Search, or other search APIs
@@ -129,9 +165,6 @@ const HeyJack = () => {
       const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
       
       if (!apiKey) {
-        if (process.env.NODE_ENV === 'production') {
-          throw new Error('ChatGPT feature requires a backend proxy for security. This feature is available in development mode. For production deployment, set up a backend API to securely handle the OpenAI API key.');
-        }
         throw new Error('OpenAI API key not found. Please set REACT_APP_OPENAI_API_KEY in your .env file');
       }
 
@@ -502,6 +535,47 @@ const HeyJack = () => {
     setError(null);
   };
 
+  // Show password form if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="heyjack-container">
+        <div className="heyjack-header">
+          <Button buttonStyle='btn--outline' buttonSize='btn--medium' to='/'>
+            Back
+          </Button>
+          <h1 className="heyjack-title">Hey Jack</h1>
+          <div style={{ width: '120px' }}></div>
+        </div>
+        <div className="heyjack-password-form">
+          <div className="heyjack-password-box">
+            <h2>Enter Password</h2>
+            <p>This page is password protected.</p>
+            <form onSubmit={handlePasswordSubmit}>
+              <input
+                ref={passwordInputRef}
+                type="password"
+                className="heyjack-password-input"
+                value={passwordInput}
+                onChange={(e) => {
+                  setPasswordInput(e.target.value);
+                  setPasswordError('');
+                }}
+                placeholder="Enter password"
+                autoFocus
+              />
+              {passwordError && (
+                <div className="heyjack-password-error">{passwordError}</div>
+              )}
+              <button type="submit" className="heyjack-password-button">
+                Access Chat
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="heyjack-container">
       <div className="heyjack-header">
@@ -512,9 +586,9 @@ const HeyJack = () => {
         <Button 
           buttonStyle='btn--outline' 
           buttonSize='btn--medium' 
-          onClick={handleClear}
+          onClick={handleLogout}
         >
-          Clear Chat
+          Logout
         </Button>
       </div>
 
@@ -522,13 +596,11 @@ const HeyJack = () => {
         <div className="heyjack-error">
           <p><strong>Error:</strong> {error}</p>
           <small>
-            {error.includes('not found') ? (
+            {error.includes('not found') && (
               <>
                 <strong>Quick fix:</strong> After creating/updating your .env file, you must restart your development server (stop with Ctrl+C, then run `npm start` again).<br />
                 Make sure your .env file is in the root directory and contains: REACT_APP_OPENAI_API_KEY=your_key_here
               </>
-            ) : (
-              'Note: For production, use a backend proxy to securely store your API key.'
             )}
           </small>
         </div>
