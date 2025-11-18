@@ -30,6 +30,13 @@ video {
   .hero-left, .hero-right {
     position: relative;
     z-index: 2;
+    pointer-events: none; /* Allow clicks to pass through to canvas */
+  }
+
+  /* Re-enable pointer events for interactive elements */
+  .hero-left h1, .hero-left h2, .hero-left h4, .hero-left p,
+  .hero-right img, .hero-btns, .hero-btns .btn {
+    pointer-events: auto;
   }
 
 
