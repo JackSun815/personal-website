@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import CardItem from './CardItem';
 import './Cards.css';
+import FloatingConstellations from './FloatingConstellations';
 import chalfant from '../images/project-chalfant.png';
 import threeKingdoms from '../images/project-threekingdom.png';
 import gcpd from '../images/gcpd.png';
@@ -21,6 +22,7 @@ function Cards() {
 
   return (
     <div className='cards'>
+      <FloatingConstellations />
       <h1>Projects</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>

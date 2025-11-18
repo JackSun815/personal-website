@@ -3,6 +3,7 @@
   background: linear-gradient(to bottom, #1a3a52, #2e5266, #3a6073);
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .cards::before {
