@@ -7,7 +7,7 @@ video {
   }
 
   .hero-container {
-    background: linear-gradient(70deg, #00467F,#A5CC82);
+    background: linear-gradient(to bottom, #1a3a52, #2e5266, #3a6073);
     color: white;
     height: 100vh; 
     width: 100%;

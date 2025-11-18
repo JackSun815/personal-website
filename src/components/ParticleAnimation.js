@@ -23,6 +23,10 @@ const ParticleAnimation = () => {
   const animate = () => {
     if (animateHeader) {
       ctx.clearRect(0, 0, width, height);
+      
+      // Draw static constellations first (background)
+      drawConstellations();
+      
       for (let i in points) {
         if (Math.abs(getDistance(target, points[i])) < 4000) {
           points[i].active = 0.3;
@@ -60,9 +64,51 @@ const ParticleAnimation = () => {
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(p.closest[i].x, p.closest[i].y);
-      ctx.strokeStyle = `rgba(156,217,249,${p.active})`;
+      ctx.strokeStyle = `rgba(200,220,255,${p.active})`;
       ctx.stroke();
     }
+  };
+
+  const drawConstellations = () => {
+    // Draw subtle static constellation patterns
+    const constellations = [
+      // Big Dipper
+      [[0.15, 0.2], [0.18, 0.22], [0.21, 0.23], [0.24, 0.22], [0.26, 0.24], [0.28, 0.26], [0.27, 0.29]],
+      // Small triangle constellation
+      [[0.75, 0.15], [0.78, 0.18], [0.72, 0.19]],
+      // W-shaped constellation
+      [[0.85, 0.3], [0.87, 0.33], [0.89, 0.31], [0.91, 0.34], [0.93, 0.32]],
+      // Small cross
+      [[0.6, 0.7], [0.62, 0.72], [0.64, 0.7], [0.62, 0.68]],
+    ];
+
+    ctx.strokeStyle = 'rgba(200, 220, 255, 0.15)';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+
+    constellations.forEach(constellation => {
+      // Draw lines
+      ctx.beginPath();
+      constellation.forEach((star, index) => {
+        const x = star[0] * width;
+        const y = star[1] * height;
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      ctx.stroke();
+
+      // Draw stars
+      constellation.forEach(star => {
+        const x = star[0] * width;
+        const y = star[1] * height;
+        ctx.beginPath();
+        ctx.arc(x, y, 2, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+    });
   };
 
   const Circle = function(pos, rad, color) {
@@ -79,7 +125,7 @@ const ParticleAnimation = () => {
       if (!_this.active) return;
       ctx.beginPath();
       ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle = `rgba(156,217,249,${_this.active})`;
+      ctx.fillStyle = `rgba(200,220,255,${_this.active})`;
       ctx.fill();
     };
   };
@@ -144,7 +190,7 @@ const ParticleAnimation = () => {
 
     // Assign a circle to each point
     for (let i in points) {
-      const c = new Circle(points[i], 2 + Math.random() * 2, 'rgba(156,217,249,0.3)');
+      const c = new Circle(points[i], 2 + Math.random() * 2, 'rgba(200,220,255,0.3)');
       points[i].circle = c;
     }
 

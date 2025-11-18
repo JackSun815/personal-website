@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh; /* Changed to min-height for better scrolling */
-    background: linear-gradient(90deg, #16222A,#3A6073);
+    background: linear-gradient(to bottom, #1a3a52, #2e5266, #3a6073);
     padding-top: 20px; /* Space for the buttons */
     padding-bottom: 100px;
   }
@@ -23,6 +23,20 @@
     overflow-y: scroll;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
+  }
+
+  /* Add constellation background */
+  .resume-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><g stroke="rgba(200,220,255,0.25)" stroke-width="1.5" fill="none"><polyline points="150,120 180,140 210,130 240,150"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/></polyline><circle cx="150" cy="120" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="180" cy="140" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.3s" repeatCount="indefinite"/></circle><circle cx="210" cy="130" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.7s" repeatCount="indefinite"/></circle><circle cx="240" cy="150" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/></circle><polyline points="800,100 830,130 860,115"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/></polyline><circle cx="800" cy="100" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/></circle><circle cx="830" cy="130" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.8s" repeatCount="indefinite"/></circle><circle cx="860" cy="115" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite"/></circle><polyline points="120,800 145,830 170,820 195,845"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.2s" repeatCount="indefinite"/></polyline><circle cx="120" cy="800" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="145" cy="830" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.8s" repeatCount="indefinite"/></circle><circle cx="170" cy="820" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/></circle><circle cx="195" cy="845" r="3" fill="rgba(255,255,255,0.8)"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.6s" repeatCount="indefinite"/></circle></g></svg>');
+    background-size: cover;
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Popup Styles */
