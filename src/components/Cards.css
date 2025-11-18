@@ -306,20 +306,41 @@ h1 {
 
 @media only screen and (max-width: 768px) {
   .cards {
-    padding: 3rem 1rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .cards__container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cards__wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   .cards__items {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 400px;
-    margin: 0 auto 2.5rem auto;
+    width: 100%;
+    margin: 0 0 2.5rem 0;
+    padding: 0;
   }
 
   .cards__featured {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 400px;
+    width: 100%;
+  }
+
+  .cards__featured-section {
+    width: 100%;
+  }
+
+  .cards__other-section {
+    width: 100%;
   }
 
   .cards__featured .cards__item {
@@ -354,16 +375,20 @@ h1 {
 
 @media only screen and (max-width: 480px) {
   .cards {
-    padding: 2rem 0.8rem;
+    padding: 2rem 1rem;
   }
 
   h1 {
     font-size: 1.8rem;
   }
 
+  .cards__wrapper {
+    max-width: 340px;
+  }
+
   .cards__items {
     gap: 1.2rem;
-    max-width: 340px;
+    width: 100%;
   }
 
   .cards__item__info {

@@ -358,12 +358,15 @@ const ParticleAnimation = () => {
     canvas.height = height;
     ctx = canvas.getContext('2d');
 
-    // Create points
+    // Create points - reduce density on mobile
+    const isMobile = width < 768;
+    const gridDensity = isMobile ? 10 : 15;
+    
     points = [];
-    for (let x = 0; x < width; x = x + width / 15) {
-      for (let y = 0; y < height; y = y + height / 15) {
-        const px = x + Math.random() * width / 15;
-        const py = y + Math.random() * height / 15;
+    for (let x = 0; x < width; x = x + width / gridDensity) {
+      for (let y = 0; y < height; y = y + height / gridDensity) {
+        const px = x + Math.random() * width / gridDensity;
+        const py = y + Math.random() * height / gridDensity;
         const p = { x: px, originX: px, y: py, originY: py };
         points.push(p);
       }
