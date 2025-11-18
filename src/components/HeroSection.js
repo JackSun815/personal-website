@@ -10,11 +10,11 @@ const profilePublicPath = process.env.PUBLIC_URL + '/images/profile.png';
 
 function HeroSection() {
   const greetings = [
-    { lang: 'English', text: '· Hello!', fontColor: '#b3b3d4' },
+    { lang: 'English', text: '· Hello!', fontColor: '#33c4abff' },
     { lang: 'French', text: '· Bonjour!', fontColor: '#b3b3d4' },
-    { lang: 'Chinese', text: '· 你好!', fontColor: '#b3b3d4' },
+    { lang: 'Chinese', text: '· 你好!', fontColor: '#429cb8ff' },
     { lang: 'German', text: '· Guten Tag!', fontColor: '#b3b3d4' },
-    { lang: 'Japanese', text: '· こんにちは!', fontColor: '#b3b3d4' }
+    { lang: 'Japanese', text: '· こんにちは!', fontColor: '#8cc44dff' }
   ];
 
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);

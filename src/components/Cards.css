@@ -22,10 +22,6 @@ h1 {
   font-weight: 700;
   color: white;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #fff, #e0e6ed);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   text-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
