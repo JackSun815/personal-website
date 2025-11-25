@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
+import FloatingConstellations from '../FloatingConstellations';
 import './Resume.css'; // Ensure you have this CSS file
 
 const Resume = () => {
@@ -7,6 +8,7 @@ const Resume = () => {
 
   return (
     <div className="resume-container">
+      <FloatingConstellations />
       <div className="button-group">
         <Button buttonStyle='btn--outline' buttonSize='btn--large' to='/about'>
           Back

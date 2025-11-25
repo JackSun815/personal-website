@@ -152,9 +152,11 @@ const Arts = () => {
       {/* Sidebar */}
       <div className={`sidebar-container ${isNavCollapsed ? 'collapsed' : 'expanded'} ${isMobile ? 'mobile' : ''}`}>
         <div className="hamburger-menu" onClick={toggleNav}>
-          <span className={isNavCollapsed ? 'collapsed' : ''}></span>
-          <span className={isNavCollapsed ? 'collapsed' : ''}></span>
-          <span className={isNavCollapsed ? 'collapsed' : ''}></span>
+          {isNavCollapsed ? (
+            <i className="fas fa-camera camera-icon"></i>
+          ) : (
+            <i className="fas fa-image images-icon"></i>
+          )}
         </div>
         
         <div className={`sidebar-content ${isNavCollapsed ? 'hidden' : 'visible'}`}>

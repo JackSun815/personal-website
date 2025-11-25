@@ -22,12 +22,15 @@ body {
     transition: all 0.3s ease;
     width: 280px;
     min-width: 280px;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .sidebar-container.collapsed {
     width: 60px !important;
     min-width: 60px !important;
+    background: transparent !important;
+    box-shadow: none;
+    border-right: none;
 }
 
 .sidebar-container.mobile {
@@ -42,9 +45,10 @@ body {
 .sidebar-container.mobile.collapsed {
     width: 60px !important;
     min-width: 60px !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+    background: transparent !important;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-right: none;
 }
 
 .sidebar-container.mobile.expanded {
@@ -76,70 +80,54 @@ body {
     position: absolute;
     top: 20px;
     right: 15px;
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     z-index: 1001;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgba(36, 127, 141, 0.1);
-    border-radius: 8px;
-    border: 2px solid #247f8d;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(36, 127, 141, 0.08), rgba(15, 91, 103, 0.12));
+    border-radius: 50%;
+    border: none;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 15px rgba(36, 127, 141, 0.15);
+    backdrop-filter: blur(10px);
 }
 
 .hamburger-menu:hover {
-    background: rgba(36, 127, 141, 0.2);
-    transform: scale(1.05);
+    background: linear-gradient(135deg, rgba(36, 127, 141, 0.15), rgba(15, 91, 103, 0.2));
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 6px 20px rgba(36, 127, 141, 0.25);
 }
 
-.hamburger-menu span {
-    display: block;
-    height: 2px;
-    width: 18px;
-    background: #247f8d;
-    border-radius: 1px;
-    transition: all 0.3s ease;
-    transform-origin: center;
-    margin: 2px 0;
+.camera-icon {
+    font-size: 22px;
+    color: #247f8d;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 2px 4px rgba(36, 127, 141, 0.3));
 }
 
-.hamburger-menu span.collapsed:nth-child(1) {
-    transform: rotate(45deg) translate(0px, 6px);
+.hamburger-menu:hover .camera-icon {
+    color: #0f5b67;
+    transform: scale(1.1);
+    filter: drop-shadow(0 3px 6px rgba(36, 127, 141, 0.5));
 }
 
-.hamburger-menu span.collapsed:nth-child(2) {
-    opacity: 0;
-    transform: scale(0);
+.images-icon {
+    font-size: 22px;
+    color: #16a085;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: drop-shadow(0 2px 4px rgba(22, 160, 133, 0.3));
 }
 
-.hamburger-menu span.collapsed:nth-child(3) {
-    transform: rotate(-45deg) translate(0px, -6px);
+.hamburger-menu:hover .images-icon {
+    color: #1abc9c;
+    transform: scale(1.15) translateY(-2px);
+    filter: drop-shadow(0 3px 6px rgba(22, 160, 133, 0.5));
 }
 
-.hamburger-menu:hover span {
-    background: #0f5b67;
-}
 
-/* Mobile overlay */
-.sidebar-container.mobile.expanded::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: -1;
-    animation: overlayFadeIn 0.3s ease;
-}
-
-@keyframes overlayFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 
 /* Header and navigation styles */
 .name {
@@ -233,20 +221,28 @@ body {
     margin-bottom: 100px !important;
 }
 
-/* Prevent main content from sliding under the sidebar on wide screens */
-/* Photography container always needs left margin for fixed sidebar */
+/* Photography container always centered, ignoring sidebar */
 .photography-container { 
-    margin-left: 280px; /* Sidebar width */
-    padding: 60px 50px;
+    margin-left: 0;
+    padding: 80px 120px;
     background: transparent;
-    transition: margin-left 0.3s ease;
+    transition: padding 0.3s ease;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 /* Adjust main content when sidebar is mobile and collapsed */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .photography-container {
-        margin-left: 60px; /* Account for collapsed mobile sidebar */
+        margin-left: 0; /* No margin when sidebar is transparent */
         padding: 40px 20px;
+    }
+
+    .sidebar-container.collapsed {
+        background: transparent !important;
+        backdrop-filter: none;
+        box-shadow: none;
+        border-right: none;
     }
 }
 
@@ -454,8 +450,9 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .photography-container {
-        margin-left: 60px; /* Account for collapsed mobile sidebar */
+        margin-left: 0; /* No margin when sidebar is transparent */
         padding: 40px 20px;
+        padding-top: 70px; /* Space for hamburger menu */
     }
 
     .photography-container h3 {
@@ -505,15 +502,17 @@ body {
     }
 
     .hamburger-menu {
-        background: rgba(36, 127, 141, 0.15);
-        padding: 6px;
-        border-radius: 8px;
-        box-shadow: 0 2px 12px rgba(36, 127, 141, 0.2);
-        border: 2px solid #247f8d;
+        width: 46px;
+        height: 46px;
+        box-shadow: 0 3px 12px rgba(36, 127, 141, 0.2);
     }
 
-    .hamburger-menu:hover {
-        background: rgba(36, 127, 141, 0.25);
+    .camera-icon {
+        font-size: 20px;
+    }
+
+    .images-icon {
+        font-size: 20px;
     }
 
     .name {
@@ -533,8 +532,9 @@ body {
 
 @media (max-width: 480px) {
     .photography-container {
-        margin-left: 60px; /* Account for collapsed mobile sidebar */
+        margin-left: 0; /* No margin when sidebar is transparent */
         padding: 30px 15px;
+        padding-top: 70px; /* Space for hamburger menu */
     }
 
     .photography-container h3 {
@@ -565,13 +565,16 @@ body {
     .hamburger-menu {
         top: 15px;
         right: 10px;
-        width: 28px;
-        height: 28px;
+        width: 42px;
+        height: 42px;
     }
 
-    .hamburger-menu span {
-        width: 16px;
-        height: 2px;
+    .camera-icon {
+        font-size: 18px;
+    }
+
+    .images-icon {
+        font-size: 18px;
     }
 }
 

@@ -347,7 +347,9 @@ const ParticleAnimation = () => {
 
   useEffect(() => {
     width = window.innerWidth;
-    height = window.innerHeight;
+    // On mobile, use the container height instead of viewport height
+    const heroContainer = document.querySelector('.hero-container');
+    height = heroContainer ? heroContainer.offsetHeight : window.innerHeight;
     target = { x: width / 2, y: height / 2 };
 
     largeHeader = document.getElementById('large-header');
@@ -420,7 +422,9 @@ const ParticleAnimation = () => {
 
     const resize = () => {
       width = window.innerWidth;
-      height = window.innerHeight;
+      // On mobile, use the container height instead of viewport height
+      const heroContainer = document.querySelector('.hero-container');
+      height = heroContainer ? heroContainer.offsetHeight : window.innerHeight;
       largeHeader.style.height = height + 'px';
       canvas.width = width;
       canvas.height = height;

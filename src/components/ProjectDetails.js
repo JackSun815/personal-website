@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProjectDetails.css';
 
 
@@ -148,6 +148,7 @@ const projectData = {
 
 function ProjectDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const project = projectData[id];
 
   // Ensure we start at top of page when navigating to a project
@@ -161,6 +162,9 @@ function ProjectDetails() {
 
   return (
     <div className='project-details'>
+      <button className='back-button' onClick={() => navigate('/projects')}>
+        <i className='fas fa-arrow-left'></i>
+      </button>
       <h1>{project.heading}</h1>
       <h2>{project.label}</h2>
       <div className='button-section'>
