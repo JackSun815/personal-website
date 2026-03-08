@@ -5,8 +5,8 @@ import '../App.css';
 import { Button } from './Button';
 import './HeroSection.css';
 import ParticleAnimation from './ParticleAnimation';
-// Use the profile image from the public/ folder. There's already a copy at public/images/profile.png.
-const profilePublicPath = process.env.PUBLIC_URL + '/images/profile.png';
+// Use the profile image from the public/ folder. There's already a copy at public/images/homepage.JPG.
+const profilePublicPath = process.env.PUBLIC_URL + '/images/homepage.JPG';
 
 function HeroSection() {
   const greetings = [

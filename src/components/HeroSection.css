@@ -85,9 +85,10 @@ video {
   }
   
   .hero-right img {
-    max-width: 50%; /* slightly larger on laptop/desktop */
-    height: auto;
-    border-radius: 12px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 50%;
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     filter: brightness(1.18) contrast(1.04) saturate(1.08) sepia(0.08) hue-rotate(-4deg);
     transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
@@ -177,7 +178,8 @@ video {
     }
   
     .hero-right img {
-      max-width: 40%; /* Make image take appropriate width on tablet */
+      width: 300px;
+      height: 300px;
       margin-right: 0;
       margin-top: -50px;
       margin-bottom: 50px;
@@ -186,7 +188,8 @@ video {
   /* Phone / small devices */
   @media screen and (max-width: 480px) {
     .hero-right img {
-      max-width: 34%; /* slightly smaller on phones so it doesn't dominate */
+      width: 200px;
+      height: 200px;
       margin-top: -30px;
       margin-bottom: 30px;
     }
