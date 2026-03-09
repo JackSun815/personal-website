@@ -60,7 +60,12 @@ const ParticleAnimation = () => {
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
       ctx.lineTo(p.closest[i].x, p.closest[i].y);
-      ctx.strokeStyle = `rgba(156,217,249,${p.active})`;
+      // Use custom color if temporary point, otherwise default blue
+      if (p.color) {
+        ctx.strokeStyle = p.color + p.active + ')';
+      } else {
+        ctx.strokeStyle = `rgba(156,217,249,${p.active})`;
+      }
       ctx.stroke();
     }
   };
@@ -79,7 +84,12 @@ const ParticleAnimation = () => {
       if (!_this.active) return;
       ctx.beginPath();
       ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle = `rgba(156,217,249,${_this.active})`;
+      // Use the circle's color if it starts with 'rgba(' but doesn't end with ')'
+      if (_this.color && _this.color.startsWith('rgba(') && !_this.color.endsWith(')')) {
+        ctx.fillStyle = _this.color + _this.active + ')';
+      } else {
+        ctx.fillStyle = `rgba(156,217,249,${_this.active})`;
+      }
       ctx.fill();
     };
   };
@@ -154,6 +164,115 @@ const ParticleAnimation = () => {
       target.y = e.pageY || e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
     };
 
+    const handleClick = (e) => {
+      const clickX = e.pageX || e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+      const clickY = e.pageY || e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      
+      // Array of colors to cycle through
+      const colors = [
+        'rgba(255, 107, 107, ', // red
+        'rgba(255, 195, 113, ', // orange
+        'rgba(255, 234, 167, ', // yellow
+        'rgba(132, 250, 176, ', // green
+        'rgba(123, 237, 255, ', // cyan
+        'rgba(162, 155, 254, ', // purple
+        'rgba(255, 118, 217, ', // pink
+        'rgba(253, 203, 110, ', // gold
+      ];
+      
+      // Pick one random color for this entire pattern
+      const selectedColor = colors[Math.floor(Math.random() * colors.length)];
+      
+      // Create cluster of connected points
+      const numPoints = Math.floor(Math.random() * 5) + 6; // 6-10 points
+      const tempPoints = [];
+      const radius = 120; // cluster radius
+      
+      // Create points in a semi-random pattern around click
+      for (let i = 0; i < numPoints; i++) {
+        const angle = (Math.PI * 2 * i) / numPoints + (Math.random() - 0.5) * 0.8;
+        const distance = Math.random() * radius + 30;
+        const x = clickX + Math.cos(angle) * distance;
+        const y = clickY + Math.sin(angle) * distance;
+        
+        const tempPoint = { 
+          x, y, 
+          originX: x, 
+          originY: y,
+          active: 0,
+          closest: [],
+          isTemp: true,
+          color: selectedColor
+        };
+        
+        const tempCircle = new Circle(tempPoint, 2 + Math.random() * 2, selectedColor);
+        tempCircle.active = 0;
+        tempPoint.circle = tempCircle;
+        tempPoints.push(tempPoint);
+      }
+      
+      // Find closest points for each temp point (to draw lines between them)
+      for (let i = 0; i < tempPoints.length; i++) {
+        const closest = [];
+        const p1 = tempPoints[i];
+        for (let j = 0; j < tempPoints.length; j++) {
+          if (i !== j) {
+            const p2 = tempPoints[j];
+            let placed = false;
+            for (let k = 0; k < 3; k++) { // Find 3 closest
+              if (!placed) {
+                if (closest[k] === undefined) {
+                  closest[k] = p2;
+                  placed = true;
+                }
+              }
+            }
+            
+            for (let k = 0; k < 3; k++) {
+              if (!placed) {
+                if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                  closest[k] = p2;
+                  placed = true;
+                }
+              }
+            }
+          }
+        }
+        p1.closest = closest;
+      }
+      
+      // Add temp points to main points array
+      tempPoints.forEach(tp => points.push(tp));
+      
+      // Fade in animation
+      tempPoints.forEach((tp, index) => {
+        TweenLite.to(tp, 0.5, {
+          delay: index * 0.05,
+          onUpdate: () => {
+            tp.active = Math.min(0.3, tp.active + 0.02);
+            tp.circle.active = Math.min(0.8, tp.circle.active + 0.05);
+          },
+          onComplete: () => {
+            // Fade out after 1.5 seconds
+            TweenLite.to(tp, 1, {
+              delay: 1.5,
+              onUpdate: () => {
+                tp.active = Math.max(0, tp.active - 0.02);
+                tp.circle.active = Math.max(0, tp.circle.active - 0.05);
+              },
+              onComplete: () => {
+                // Remove from points array
+                const idx = points.indexOf(tp);
+                if (idx > -1) {
+                  points.splice(idx, 1);
+                }
+              }
+            });
+          }
+        });
+      });
+    };
+
     const scrollCheck = () => {
       animateHeader = document.body.scrollTop <= height;
     };
@@ -169,6 +288,7 @@ const ParticleAnimation = () => {
     const addListeners = () => {
       if (!('ontouchstart' in window)) {
         window.addEventListener('mousemove', mouseMove);
+        window.addEventListener('click', handleClick);
       }
       window.addEventListener('scroll', scrollCheck);
       window.addEventListener('resize', resize);
@@ -181,6 +301,7 @@ const ParticleAnimation = () => {
 
     return () => {
       window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('click', handleClick);
       window.removeEventListener('scroll', scrollCheck);
       window.removeEventListener('resize', resize);
     };

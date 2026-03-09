@@ -7,12 +7,17 @@
     background-size: cover;
     background-position: center center;
     z-index: 1;
+    pointer-events: auto;
   }
   
   #large-header {
     /* background-image: url('https://www.marcoguglie.it/Codepen/AnimatedHeaderBg/demo-1/img/demo-1-bg.jpg'); */
     background: linear-gradient(90deg, #16222A,#3A6073);
-
+    pointer-events: auto;
+  }
+  
+  #demo-canvas {
+    pointer-events: auto;
   }
   
   .demo-1 .main-title {

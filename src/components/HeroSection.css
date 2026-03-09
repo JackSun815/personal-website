@@ -30,6 +30,7 @@ video {
   .hero-left, .hero-right {
     position: relative;
     z-index: 2;
+    pointer-events: none;
   }
 
 
@@ -92,6 +93,7 @@ video {
     box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     filter: brightness(1.18) contrast(1.04) saturate(1.08) sepia(0.08) hue-rotate(-4deg);
     transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+    pointer-events: auto;
   }
 
 .hero-right img:hover {
@@ -109,10 +111,16 @@ video {
   
   .hero-btns {
     margin-top: 32px;
+    pointer-events: auto;
   }
   
   .hero-btns .btn {
     margin: 6px;
+    pointer-events: auto;
+  }
+  
+  .hero-btns a {
+    pointer-events: auto;
   }
 
   .icon {
