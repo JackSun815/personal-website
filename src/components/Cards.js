@@ -30,7 +30,7 @@ function Cards() {
               <CardItem
                 id="pypeflow"
                 data-aos='fade-up'
-                src={`${process.env.PUBLIC_URL}/images/pypeflow-placeholder.png`}
+                src={`${process.env.PUBLIC_URL}/images/project-pypeflow.png`}
                 heading='PypeFlow'
                 text='Production level three-in-one dashboard for Managers, SDRs, and clients'
                 label='Python, Flask, React'

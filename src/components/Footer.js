@@ -32,7 +32,7 @@ function Footer() {
                 <div className='footer-section'>
                     <h3>Contact</h3>
                     <p className='footer-contact'>
-                        <a href="mailto:jack.sun121601@gmail.com">jack.sun121601@gmail.com</a>
+                        <a href="mailto:jack@jacksunn.com">jack@jacksunn.com</a>
                     </p>
                     <div className='social-links'>
                         <a href="https://linkedin.com/in/jacksun815" target="_blank" rel="noopener noreferrer">LinkedIn</a>

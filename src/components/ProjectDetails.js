@@ -6,6 +6,35 @@ import './ProjectDetails.css';
 
 
 const projectData = {
+  pypeflow: {
+    heading: "PypeFlow: A Multi-Tenant SDR Meeting Management Platform",
+    label: 'Full-Stack SaaS Application',
+    demo: 'https://pypeflow.com',
+    text: `PypeFlow is a production SaaS platform I built from the ground up to solve a problem I saw firsthand—sales development teams drowning in spreadsheets, bouncing between disconnected tools, and losing track of meetings, commissions, and performance data. I wanted to create something that would give SDR teams, managers, and clients a single source of truth for everything meeting-related, with real-time updates and zero manual reconciliation.<br /><br />
+    
+    The platform serves active users daily across multiple agencies, with role-based dashboards tailored for Managers, SDRs, and Clients. I built it using React and TypeScript on the frontend, with Supabase handling the backend and database. What started as a solution to spreadsheet chaos became a full-featured platform with calendar management, commission tracking, performance analytics, and even an ICP (Ideal Customer Profile) approval workflow`,
+    
+    details: `Building PypeFlow meant tackling some genuinely challenging problems, especially around multi-tenancy and data isolation. Each agency operates independently, but they all share the same codebase. To make that work securely, I designed a multi-tenant architecture using Supabase's Row-Level Security policies—data access is enforced at the database level, so managers only see their team's data, SDRs only see their own meetings, and clients see what's relevant to their account.<br /><br />
+    
+    One of the most complex features I built was the dynamic commission system. Different agencies have different compensation structures, so I needed something flexible enough to handle per-meeting rates, goal-based bonuses, and custom week-specific overrides. The system automatically calculates projected earnings, tracks historical performance, and exports detailed commission reports.<br /><br />
+    
+    The calendar interface was another major undertaking—four distinct views (Month, Week, Day, List) that update in real-time across all user roles. When an SDR creates a meeting, it flows instantly to manager oversight and client visibility. You can drag and drop meetings between status categories, everything is timezone-aware, and each meeting has an interactive modal with all the details you'd need at a glance.<br /><br />
+    
+    I integrated Chart.js for comprehensive performance insights—monthly tracking with progress bars, meeting status distribution, SDR performance comparisons, and client-specific goal progress. Everything is exportable to CSV with customizable column selection. The manager dashboard gives team leads six interactive metric cards, an SDR performance table with month-by-month comparisons, full client management, and a searchable meeting history with advanced filtering.<br /><br />
+    
+    SDRs get their own dashboard with real-time metrics tracking, a client breakdown showing targets and progress, full meeting management across all statuses, and projected commission earnings. Clients get a simplified view with calendar access, ICP management tools, and lead sample uploads.<br /><br />
+    
+    From an architecture standpoint, PypeFlow is built on PostgreSQL via Supabase with real-time subscriptions, optimistic UI updates, and custom SQL migrations for complex data transformations. Security includes JWT-based authentication, role-based access control, and comprehensive audit logging. The platform is deployed with automated CI/CD, Google Analytics integration, SEO optimization, and responsive design across all devices.<br /><br />
+    
+    PypeFlow is actively maintained with regular feature additions. I'm currently working on AI-powered insights for meeting outcome prediction, automated follow-up sequences, a CRM integration marketplace, and advanced reporting with custom dashboard widgets.<br /><br />
+    
+    <b>View more details at <a href="https://pypeflow.com" target="_blank" rel="noopener noreferrer">pypeflow.com</a></b>`,
+    
+    screenshots: [
+      `${process.env.PUBLIC_URL}/images/carousel-1.gif`,
+      `${process.env.PUBLIC_URL}/images/carousel-4.gif`
+    ]
+  },
   ribbit: {
     heading: "Ribbit: A Language Visualization App",
     label: 'IOS App',

@@ -20,11 +20,26 @@ function CardItem(props) {
         </div>
         <Link className='cards__item__link' to={`/project/${props.id}`}>
           <figure className='cards__item__pic-wrap' data-category={props.label}>
-            <img
-              className='cards__item__img'
-              alt='Project Image'
-              src={props.src}
-            />
+            {props.textLogo ? (
+              <div className='cards__item__text-logo' style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+                fontWeight: 'bold',
+                fontSize: '3rem',
+                color: 'rgb(59 130 246)',
+                textAlign: 'center'
+              }}>
+                {props.textLogo}
+              </div>
+            ) : (
+              <img
+                className='cards__item__img'
+                alt='Project Image'
+                src={props.src}
+              />
+            )}
           </figure>
           <div className='cards__item__info'>
             <h3 className='cards__item__header'>{props.heading}</h3>
