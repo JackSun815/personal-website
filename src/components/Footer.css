@@ -104,82 +104,14 @@
   transition: all 0.3s ease;
   font-size: 18px;
   margin: 0 auto;
+  text-decoration: none;
+  color: inherit;
 }
 
 .admin-trigger:hover {
   background: rgba(115, 232, 238, 0.2);
   border-color: #73e8ee;
   transform: scale(1.05);
-}
-
-.analytics-access {
-  position: absolute;
-  bottom: 60px;
-  right: 0;
-  background: rgba(26, 26, 26, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(115, 232, 238, 0.3);
-  border-radius: 10px;
-  padding: 20px;
-  min-width: 200px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
-
-.analytics-access h4 {
-  color: #73e8ee;
-  margin: 0 0 15px 0;
-  font-size: 14px;
-  text-align: center;
-}
-
-.analytics-access form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.password-input {
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(115, 232, 238, 0.3);
-  border-radius: 5px;
-  color: #ffffff;
-  font-size: 14px;
-}
-
-.password-input:focus {
-  outline: none;
-  border-color: #73e8ee;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.password-input::placeholder {
-  color: #cccccc;
-}
-
-.access-btn {
-  padding: 8px 16px;
-  background: linear-gradient(135deg, #73e8ee, #5bc3c9);
-  border: none;
-  border-radius: 5px;
-  color: #1a1a1a;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 14px;
-}
-
-.access-btn:hover {
-  background: linear-gradient(135deg, #5bc3c9, #73e8ee);
-  transform: translateY(-1px);
-}
-
-.error-message {
-  color: #ff6b6b;
-  font-size: 12px;
-  margin: 5px 0 0 0;
-  text-align: center;
 }
 
 /* Footer Bottom */
@@ -206,14 +138,6 @@
   
   .social-links {
     justify-content: center;
-  }
-  
-  .analytics-access {
-    position: fixed;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    right: auto;
   }
   
   .admin-trigger {

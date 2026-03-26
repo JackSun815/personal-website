@@ -10,7 +10,7 @@ const projectData = {
     heading: "PypeFlow: A Multi-Tenant SDR Meeting Management Platform",
     label: 'Full-Stack SaaS Application',
     demo: 'https://pypeflow.com',
-    text: `PypeFlow is a production SaaS platform I built from the ground up to solve a problem I saw firsthand—sales development teams drowning in spreadsheets, bouncing between disconnected tools, and losing track of meetings, commissions, and performance data. I wanted to create something that would give SDR teams, managers, and clients a single source of truth for everything meeting-related, with real-time updates and zero manual reconciliation.<br /><br />
+    text: `PypeFlow is a production SaaS platform I built from the ground up to solve a problem I saw firsthand: sales development teams drowning in spreadsheets, bouncing between disconnected tools, and losing track of meetings, commissions, and performance data. I wanted to create something that would give SDR teams, managers, and clients a single source of truth for everything meeting-related, with real-time updates and zero manual reconciliation.<br /><br />
     
     The platform serves active users daily across multiple agencies, with role-based dashboards tailored for Managers, SDRs, and Clients. I built it using React and TypeScript on the frontend, with Supabase handling the backend and database. What started as a solution to spreadsheet chaos became a full-featured platform with calendar management, commission tracking, performance analytics, and even an ICP (Ideal Customer Profile) approval workflow`,
     

@@ -1,31 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
-    const [showAnalyticsAccess, setShowAnalyticsAccess] = useState(false);
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const ANALYTICS_PASSWORD = 'jacksun2024!';
-
-    const handlePasswordSubmit = (e) => {
-        e.preventDefault();
-        if (password === ANALYTICS_PASSWORD) {
-            setError('');
-            window.location.href = '/analytics';
-        } else {
-            setError('Invalid password');
-            setPassword('');
-        }
-    };
-
-    const toggleAnalyticsAccess = () => {
-        setShowAnalyticsAccess(!showAnalyticsAccess);
-        setPassword('');
-        setError('');
-    };
-
     return (
         <div id="footer" className='footer-container'>
             <div className='footer-content'>
@@ -61,30 +38,14 @@ function Footer() {
                 </div>
 
                 <div className='footer-section admin-section'>
-                    <div 
+                    <Link
+                        to="/analytics"
                         className='admin-trigger'
-                        onClick={toggleAnalyticsAccess}
-                        title="Admin Access"
+                        title="Analytics Dashboard"
+                        aria-label="Open analytics dashboard"
                     >
                         ⚙️
-                    </div>
-                    
-                    {showAnalyticsAccess && (
-                        <div className='analytics-access'>
-                            <h4>Analytics Access</h4>
-                            <form onSubmit={handlePasswordSubmit}>
-                                <input
-                                    type="password"
-                                    placeholder="Enter password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className='password-input'
-                                />
-                                <button type="submit" className='access-btn'>Access</button>
-                            </form>
-                            {error && <p className='error-message'>{error}</p>}
-                        </div>
-                    )}
+                    </Link>
                 </div>
             </div>
 

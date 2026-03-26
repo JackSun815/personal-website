@@ -21,12 +21,13 @@ const Analytics = () => {
     referralSources: [],
     searchTerms: [],
     visitorLocations: [],
-    recentVisitors: []
+    recentVisitors: [],
+    topRegions: []
   });
   const [realTimeData, setRealTimeData] = useState([]);
 
   // Simple password protection
-  const ANALYTICS_PASSWORD = 'jacksun2024!';
+  const ANALYTICS_PASSWORD = 'jack.sun2026-';
 
   // Initialize analytics tracking
   useEffect(() => {
@@ -256,12 +257,13 @@ const Analytics = () => {
 
     // Process data for analytics
     const now = new Date();
-    const last24Hours = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    const last7Days = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
     
     // Filter recent data
-    const recentPageViews = pageViews.filter(pv => new Date(pv.timestamp) > last24Hours);
-    const recentClicks = clicks.filter(c => new Date(c.timestamp) > last24Hours);
-    const recentLocations = locations.filter(l => new Date(l.timestamp) > last24Hours);
+    const recentPageViews = pageViews.filter(pv => new Date(pv.timestamp) > last7Days);
+    const recentClicks = clicks.filter(c => new Date(c.timestamp) > last7Days);
+    const recentLocations = locations.filter(l => new Date(l.timestamp) > last7Days);
+    const recentTimeOnPage = timeOnPage.filter(t => new Date(t.timestamp) > last7Days);
 
     // Calculate unique visitors
     const uniqueVisitors = new Set(recentPageViews.map(pv => pv.sessionId)).size;
@@ -288,6 +290,17 @@ const Analytics = () => {
       .slice(0, 5)
       .map(([country, visitors]) => ({ country, visitors }));
 
+    // Calculate top regions/areas
+    const regionCount = {};
+    recentLocations.forEach(loc => {
+      const area = `${loc.city || 'Unknown City'}, ${loc.region || 'Unknown Region'}, ${loc.country || 'Unknown Country'}`;
+      regionCount[area] = (regionCount[area] || 0) + 1;
+    });
+    const topRegions = Object.entries(regionCount)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 7)
+      .map(([area, visitors]) => ({ area, visitors }));
+
     // Calculate device types
     const deviceCount = { Desktop: 0, Mobile: 0, Tablet: 0 };
     recentPageViews.forEach(pv => {
@@ -309,8 +322,8 @@ const Analytics = () => {
       }));
 
     // Calculate average session duration
-    const avgDuration = timeOnPage.length > 0 
-      ? Math.round(timeOnPage.reduce((sum, t) => sum + t.timeSpent, 0) / timeOnPage.length)
+    const avgDuration = recentTimeOnPage.length > 0 
+      ? Math.round(recentTimeOnPage.reduce((sum, t) => sum + t.timeSpent, 0) / recentTimeOnPage.length)
       : 0;
     const avgSessionDuration = `${Math.floor(avgDuration / 60)}:${(avgDuration % 60).toString().padStart(2, '0')}`;
 
@@ -361,7 +374,8 @@ const Analytics = () => {
       referralSources: recentPageViews.map(pv => pv.referrer).filter(r => r !== 'direct').slice(0, 5),
       searchTerms: [], // Would need search tracking implementation
       visitorLocations: visitorLocations,
-      recentVisitors: recentVisitors
+      recentVisitors: recentVisitors,
+      topRegions: topRegions
     });
 
     setRealTimeData(allActivity);
@@ -595,22 +609,22 @@ const Analytics = () => {
         <div className="stat-card">
           <h3>Page Views</h3>
           <div className="stat-number">{analytics.pageViews.toLocaleString()}</div>
-          <div className="stat-label">Last 24 hours</div>
+          <div className="stat-label">Last 7 days</div>
         </div>
         <div className="stat-card">
           <h3>Unique Visitors</h3>
           <div className="stat-number">{analytics.uniqueVisitors.toLocaleString()}</div>
-          <div className="stat-label">Last 24 hours</div>
+          <div className="stat-label">Last 7 days</div>
         </div>
         <div className="stat-card">
           <h3>Sessions</h3>
           <div className="stat-number">{analytics.sessions.toLocaleString()}</div>
-          <div className="stat-label">Last 24 hours</div>
+          <div className="stat-label">Last 7 days</div>
         </div>
         <div className="stat-card">
           <h3>Bounce Rate</h3>
           <div className="stat-number">{analytics.bounceRate}%</div>
-          <div className="stat-label">Last 24 hours</div>
+          <div className="stat-label">Last 7 days</div>
         </div>
         <div className="stat-card">
           <h3>Avg. Session</h3>
@@ -627,7 +641,7 @@ const Analytics = () => {
 
       {/* Recent Visitors with IP Details */}
       <div className="analytics-section">
-        <h3>👥 Recent Visitors & IP Tracking</h3>
+        <h3>👥 Recent Visitors & IP Tracking (Last 7 Days)</h3>
         <div className="visitor-list">
           {analytics.recentVisitors.length > 0 ? (
             <div className="visitor-table">
@@ -702,7 +716,7 @@ const Analytics = () => {
 
       {/* Click Heatmap */}
       <div className="analytics-section">
-        <h3>🎯 Click Heatmap (Last 24 Hours)</h3>
+        <h3>🎯 Click Heatmap (Last 7 Days)</h3>
         <div className="heatmap-container">
           {analytics.clickHeatmap.length > 0 ? (
             <div className="heatmap-data">
@@ -751,6 +765,22 @@ const Analytics = () => {
               ))
             ) : (
               <p className="no-data">No location data yet</p>
+            )}
+          </div>
+        </div>
+
+        <div className="analytics-section">
+          <h3>📍 Top Areas (City/Region)</h3>
+          <div className="data-table">
+            {analytics.topRegions.length > 0 ? (
+              analytics.topRegions.map((region, index) => (
+                <div key={index} className="data-row">
+                  <span className="data-label">{region.area}</span>
+                  <span className="data-value">{region.visitors} visitors</span>
+                </div>
+              ))
+            ) : (
+              <p className="no-data">No area data yet</p>
             )}
           </div>
         </div>
