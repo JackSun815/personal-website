@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Analytics.css';
+import { fetchAnalyticsSummary } from '../services/analyticsApi';
 
 const Analytics = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [analytics, setAnalytics] = useState({
     pageViews: 0,
     uniqueVisitors: 0,
@@ -25,361 +23,66 @@ const Analytics = () => {
     topRegions: []
   });
   const [realTimeData, setRealTimeData] = useState([]);
+  const [loadingError, setLoadingError] = useState('');
 
-  // Simple password protection
-  const ANALYTICS_PASSWORD = 'jack.sun2026-';
-
-  // Initialize analytics tracking
+  // Load analytics from backend with a 7-day window.
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initializeTracking();
-      loadStoredAnalytics();
-      
-      // Set up real-time data refresh
-      const interval = setInterval(() => {
-        loadStoredAnalytics();
-      }, 5000); // Refresh every 5 seconds
+    let mounted = true;
 
-      return () => clearInterval(interval);
-    }
-  }, []);
-
-  const initializeTracking = () => {
-    // Track page views
-    trackPageView();
-    
-    // Track clicks
-    document.addEventListener('click', trackClick);
-    
-    // Track scroll behavior
-    let scrollDepth = 0;
-    window.addEventListener('scroll', () => {
-      const currentScroll = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-      if (currentScroll > scrollDepth) {
-        scrollDepth = currentScroll;
-        trackScrollDepth(scrollDepth);
-      }
-    });
-
-    // Track time on page
-    const startTime = Date.now();
-    window.addEventListener('beforeunload', () => {
-      const timeSpent = Math.round((Date.now() - startTime) / 1000);
-      trackTimeOnPage(timeSpent);
-    });
-
-    // Get user location (IP-based)
-    getUserLocation();
-  };
-
-  const trackPageView = () => {
-    const pageData = {
-      page: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      referrer: document.referrer || 'direct',
-      screenResolution: `${window.screen.width}x${window.screen.height}`,
-      viewportSize: `${window.innerWidth}x${window.innerHeight}`,
-      sessionId: getSessionId()
-    };
-
-    saveAnalyticsData('pageViews', pageData);
-    
-    // Track with Google Analytics too
-    if (window.gtag) {
-      window.gtag('event', 'page_view', {
-        page_title: document.title,
-        page_location: window.location.href,
-        custom_parameter: pageData.sessionId
-      });
-    }
-  };
-
-  const trackClick = (event) => {
-    const clickData = {
-      x: event.clientX,
-      y: event.clientY,
-      element: event.target.tagName,
-      className: event.target.className,
-      text: event.target.textContent?.substring(0, 50),
-      page: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      sessionId: getSessionId()
-    };
-
-    saveAnalyticsData('clicks', clickData);
-  };
-
-  const trackScrollDepth = (depth) => {
-    const scrollData = {
-      depth: depth,
-      page: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      sessionId: getSessionId()
-    };
-
-    saveAnalyticsData('scrollDepth', scrollData);
-  };
-
-  const trackTimeOnPage = (timeSpent) => {
-    const timeData = {
-      timeSpent: timeSpent,
-      page: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      sessionId: getSessionId()
-    };
-
-    saveAnalyticsData('timeOnPage', timeData);
-  };
-
-  const getUserLocation = async () => {
-    try {
-      // Try multiple geolocation services for better accuracy
-      let locationData = null;
-      
-      // First, try ipapi.co (most accurate)
+    const load = async () => {
       try {
-        const response1 = await fetch('https://ipapi.co/json/');
-        const data1 = await response1.json();
-        if (data1.latitude && data1.longitude && data1.latitude !== 0 && data1.longitude !== 0) {
-          locationData = data1;
-          console.log('Using ipapi.co location data:', data1);
-        }
+        const summary = await fetchAnalyticsSummary(7);
+        if (!mounted) return;
+
+        const recentVisitors = (summary.recentVisitors || []).map((visitor) => ({
+          ...visitor,
+          timeAgo: getTimeAgo(visitor.timestamp),
+          location: `${visitor.city || 'Unknown City'}, ${visitor.region || 'Unknown Region'}, ${visitor.country || 'Unknown Country'}`,
+          coordinates:
+            visitor.latitude && visitor.longitude
+              ? `${visitor.latitude}, ${visitor.longitude}`
+              : 'Unknown'
+        }));
+
+        const visitorLocations = (summary.visitorLocations || []).map((loc) => ({
+          ...loc,
+          timeAgo: getTimeAgo(loc.timestamp)
+        }));
+
+        setAnalytics({
+          pageViews: summary.pageViews || 0,
+          uniqueVisitors: summary.uniqueVisitors || 0,
+          sessions: summary.sessions || 0,
+          bounceRate: summary.bounceRate || '0.0',
+          avgSessionDuration: summary.avgSessionDuration || '0:00',
+          topPages: summary.topPages || [],
+          topCountries: summary.topCountries || [],
+          topDevices: summary.topDevices || [],
+          realtimeUsers: summary.realtimeUsers || 0,
+          clickHeatmap: summary.clickHeatmap || [],
+          userJourneys: summary.userJourneys || [],
+          liveActivity: summary.liveActivity || [],
+          referralSources: summary.referralSources || [],
+          searchTerms: summary.searchTerms || [],
+          visitorLocations,
+          recentVisitors
+        });
+        setRealTimeData(summary.liveActivity || []);
+        setLoadingError('');
       } catch (error) {
-        console.log('ipapi.co failed, trying backup service');
+        if (!mounted) return;
+        setLoadingError('Could not load backend analytics. Check API server and credentials.');
       }
-      
-      // Backup: try ip-api.com if first service fails or gives invalid coordinates
-      if (!locationData) {
-        try {
-          const response2 = await fetch('http://ip-api.com/json/');
-          const data2 = await response2.json();
-          if (data2.lat && data2.lon && data2.lat !== 0 && data2.lon !== 0) {
-            locationData = {
-              country_name: data2.country,
-              country_code: data2.countryCode,
-              city: data2.city,
-              region: data2.regionName,
-              region_code: data2.region,
-              postal: data2.zip,
-              latitude: data2.lat,
-              longitude: data2.lon,
-              timezone: data2.timezone,
-              ip: data2.query,
-              org: data2.isp,
-              asn: data2.as
-            };
-            console.log('Using ip-api.com location data:', locationData);
-          }
-        } catch (error) {
-          console.log('ip-api.com also failed');
-        }
-      }
-      
-      // If we have valid location data
-      if (locationData && locationData.latitude && locationData.longitude) {
-        const geoData = {
-          country: locationData.country_name,
-          countryCode: locationData.country_code,
-          city: locationData.city,
-          region: locationData.region,
-          regionCode: locationData.region_code,
-          postalCode: locationData.postal,
-          latitude: parseFloat(locationData.latitude),
-          longitude: parseFloat(locationData.longitude),
-          timezone: locationData.timezone,
-          utcOffset: locationData.utc_offset,
-          ip: locationData.ip,
-          isp: locationData.org,
-          asn: locationData.asn,
-          timestamp: new Date().toISOString(),
-          sessionId: getSessionId(),
-          userAgent: navigator.userAgent,
-          language: navigator.language,
-          accuracy: 'ip-based' // Mark as IP-based for reference
-        };
+    };
 
-        console.log('Final geoData to be saved:', geoData);
-        saveAnalyticsData('locations', geoData);
-      } else {
-        console.log('No valid location data received from any service');
-        
-        // Save a fallback entry with unknown location but other data
-        const fallbackData = {
-          country: 'Unknown',
-          countryCode: 'XX',
-          city: 'Unknown',
-          region: 'Unknown',
-          latitude: null,
-          longitude: null,
-          ip: 'Unknown',
-          timestamp: new Date().toISOString(),
-          sessionId: getSessionId(),
-          userAgent: navigator.userAgent,
-          language: navigator.language,
-          accuracy: 'unavailable'
-        };
-        
-        saveAnalyticsData('locations', fallbackData);
-      }
-    } catch (error) {
-      console.error('Error getting location data:', error);
-    }
-  };
+    load();
+    const interval = setInterval(load, 15000);
 
-  const getSessionId = () => {
-    let sessionId = localStorage.getItem('analyticsSessionId');
-    if (!sessionId) {
-      sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-      localStorage.setItem('analyticsSessionId', sessionId);
-    }
-    return sessionId;
-  };
-
-  const saveAnalyticsData = (type, data) => {
-    const existingData = JSON.parse(localStorage.getItem(`analytics_${type}`) || '[]');
-    existingData.push(data);
-    
-    // Keep only last 1000 entries to prevent storage overflow
-    if (existingData.length > 1000) {
-      existingData.splice(0, existingData.length - 1000);
-    }
-    
-    localStorage.setItem(`analytics_${type}`, JSON.stringify(existingData));
-  };
-
-  const loadStoredAnalytics = () => {
-    const pageViews = JSON.parse(localStorage.getItem('analytics_pageViews') || '[]');
-    const clicks = JSON.parse(localStorage.getItem('analytics_clicks') || '[]');
-    const locations = JSON.parse(localStorage.getItem('analytics_locations') || '[]');
-    const timeOnPage = JSON.parse(localStorage.getItem('analytics_timeOnPage') || '[]');
-    const scrollDepth = JSON.parse(localStorage.getItem('analytics_scrollDepth') || '[]');
-
-    // Process data for analytics
-    const now = new Date();
-    const last7Days = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-    
-    // Filter recent data
-    const recentPageViews = pageViews.filter(pv => new Date(pv.timestamp) > last7Days);
-    const recentClicks = clicks.filter(c => new Date(c.timestamp) > last7Days);
-    const recentLocations = locations.filter(l => new Date(l.timestamp) > last7Days);
-    const recentTimeOnPage = timeOnPage.filter(t => new Date(t.timestamp) > last7Days);
-
-    // Calculate unique visitors
-    const uniqueVisitors = new Set(recentPageViews.map(pv => pv.sessionId)).size;
-
-    // Calculate top pages
-    const pageCount = {};
-    recentPageViews.forEach(pv => {
-      pageCount[pv.page] = (pageCount[pv.page] || 0) + 1;
-    });
-    const topPages = Object.entries(pageCount)
-      .sort(([,a], [,b]) => b - a)
-      .slice(0, 5)
-      .map(([page, views]) => ({ page, views }));
-
-    // Calculate top countries
-    const countryCount = {};
-    recentLocations.forEach(loc => {
-      if (loc.country) {
-        countryCount[loc.country] = (countryCount[loc.country] || 0) + 1;
-      }
-    });
-    const topCountries = Object.entries(countryCount)
-      .sort(([,a], [,b]) => b - a)
-      .slice(0, 5)
-      .map(([country, visitors]) => ({ country, visitors }));
-
-    // Calculate top regions/areas
-    const regionCount = {};
-    recentLocations.forEach(loc => {
-      const area = `${loc.city || 'Unknown City'}, ${loc.region || 'Unknown Region'}, ${loc.country || 'Unknown Country'}`;
-      regionCount[area] = (regionCount[area] || 0) + 1;
-    });
-    const topRegions = Object.entries(regionCount)
-      .sort(([,a], [,b]) => b - a)
-      .slice(0, 7)
-      .map(([area, visitors]) => ({ area, visitors }));
-
-    // Calculate device types
-    const deviceCount = { Desktop: 0, Mobile: 0, Tablet: 0 };
-    recentPageViews.forEach(pv => {
-      if (pv.userAgent) {
-        if (/Mobile|Android|iPhone/.test(pv.userAgent)) {
-          deviceCount.Mobile++;
-        } else if (/iPad/.test(pv.userAgent)) {
-          deviceCount.Tablet++;
-        } else {
-          deviceCount.Desktop++;
-        }
-      }
-    });
-    const totalDevices = Object.values(deviceCount).reduce((a, b) => a + b, 0);
-    const topDevices = Object.entries(deviceCount)
-      .map(([device, count]) => ({ 
-        device, 
-        percentage: totalDevices > 0 ? ((count / totalDevices) * 100).toFixed(1) : '0.0'
-      }));
-
-    // Calculate average session duration
-    const avgDuration = recentTimeOnPage.length > 0 
-      ? Math.round(recentTimeOnPage.reduce((sum, t) => sum + t.timeSpent, 0) / recentTimeOnPage.length)
-      : 0;
-    const avgSessionDuration = `${Math.floor(avgDuration / 60)}:${(avgDuration % 60).toString().padStart(2, '0')}`;
-
-    // Get recent activity for live feed
-    const allActivity = [
-      ...recentPageViews.map(pv => ({ ...pv, type: 'pageview' })),
-      ...recentClicks.map(c => ({ ...c, type: 'click' }))
-    ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 10);
-
-    // Create click heatmap data
-    const heatmapData = recentClicks.map(click => ({
-      x: click.x,
-      y: click.y,
-      page: click.page,
-      element: click.element,
-      timestamp: click.timestamp
-    }));
-
-    // Process visitor locations for map
-    const visitorLocations = recentLocations.map(loc => ({
-      ...loc,
-      timeAgo: getTimeAgo(loc.timestamp)
-    }));
-
-    // Get recent visitors with detailed info
-    const recentVisitors = recentLocations
-      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-      .slice(0, 20)
-      .map(visitor => ({
-        ...visitor,
-        timeAgo: getTimeAgo(visitor.timestamp),
-        location: `${visitor.city || 'Unknown City'}, ${visitor.region || 'Unknown Region'}, ${visitor.country || 'Unknown Country'}`,
-        coordinates: visitor.latitude && visitor.longitude ? `${visitor.latitude}, ${visitor.longitude}` : 'Unknown'
-      }));
-
-    setAnalytics({
-      pageViews: recentPageViews.length,
-      uniqueVisitors: uniqueVisitors,
-      sessions: uniqueVisitors, // Approximation
-      bounceRate: uniqueVisitors > 0 ? ((uniqueVisitors - Math.min(uniqueVisitors, topPages.reduce((sum, p) => sum + p.views, 0))) / uniqueVisitors * 100).toFixed(1) : '0.0',
-      avgSessionDuration: avgSessionDuration,
-      topPages: topPages,
-      topCountries: topCountries,
-      topDevices: topDevices,
-      realtimeUsers: Math.min(5, uniqueVisitors), // Active users approximation
-      clickHeatmap: heatmapData,
-      liveActivity: allActivity,
-      referralSources: recentPageViews.map(pv => pv.referrer).filter(r => r !== 'direct').slice(0, 5),
-      searchTerms: [], // Would need search tracking implementation
-      visitorLocations: visitorLocations,
-      recentVisitors: recentVisitors,
-      topRegions: topRegions
-    });
-
-    setRealTimeData(allActivity);
-  };
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   const getTimeAgo = (timestamp) => {
     const now = new Date();
@@ -544,63 +247,19 @@ const Analytics = () => {
     );
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (password === ANALYTICS_PASSWORD) {
-      setIsAuthenticated(true);
-      setError('');
-      localStorage.setItem('analytics_auth', 'true');
-      loadStoredAnalytics();
-    } else {
-      setError('Invalid password');
-    }
-  };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('analytics_auth');
-    setPassword('');
-  };
-
-  useEffect(() => {
-    const isAuth = localStorage.getItem('analytics_auth');
-    if (isAuth === 'true') {
-      setIsAuthenticated(true);
-      loadStoredAnalytics();
-    }
-  }, []);
-
-  if (!isAuthenticated) {
-    return (
-      <div className="analytics-login">
-        <div className="login-container">
-          <h2>🔒 Real-Time Analytics Dashboard</h2>
-          <p>Enter password to access live user tracking</p>
-          <form onSubmit={handleLogin}>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="password-input"
-            />
-            <button type="submit" className="login-btn">Access Analytics</button>
-          </form>
-          {error && <p className="error">{error}</p>}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="analytics-dashboard">
+      {loadingError && (
+        <div className="analytics-section">
+          <p className="no-data">{loadingError}</p>
+        </div>
+      )}
       <div className="analytics-header">
         <h1>📊 Real-Time Analytics Dashboard</h1>
         <div className="header-actions">
           <span className="realtime-indicator">
             🟢 {analytics.realtimeUsers} active users
           </span>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
         </div>
       </div>
 

@@ -70,3 +70,40 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 # Personal Website hosted on jacksunn.com 
+
+## Backend Analytics (7-day history)
+
+This project now includes a backend analytics API with SQLite persistence, so visitor history is no longer stored only in each browser.
+
+### What it stores
+
+- Server-side page views
+- Visitor IP (as seen by your server/proxy)
+- Country, region, city, timezone, ISP (best-effort IP geolocation)
+- Path, referrer, user agent, timestamp, session id
+
+### Local setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create env file:
+
+```bash
+cp .env.example .env
+```
+
+3. Start frontend and backend together:
+
+```bash
+npm run dev
+```
+
+### Production notes
+
+- GitHub Pages cannot host the Node API. Deploy the backend separately (Render, Railway, Fly.io, VPS, etc.).
+- Set `REACT_APP_ANALYTICS_API_URL` to your deployed API URL.
+- If you set `ANALYTICS_DASHBOARD_KEY` on backend, also set `REACT_APP_ANALYTICS_DASHBOARD_KEY` on frontend.
